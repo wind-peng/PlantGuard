@@ -1,0 +1,19 @@
+name: Build PlantGuard
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build unsigned .tipa
+        run: bash ./build.sh
+      - name: Upload tipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlantGuard-tipa
+          path: PlantGuard-v1.0.0.tipa
