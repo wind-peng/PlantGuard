@@ -65,23 +65,69 @@
   .cell .plant-emoji svg{width:54px;height:54px;display:block}
   .plant-card .pe svg{width:54px;height:54px}
   @keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-2px)}}
-  .zombie{position:absolute;width:62px;height:92px;margin-left:-8px;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .12s linear}
-  .zombie .z-emoji{font-size:52px;line-height:1;animation:bob .6s ease-in-out infinite alternate;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(var(--zhue,0deg))}
-  .zombie.chilled .z-emoji{filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(145deg) saturate(.45) brightness(1.3)}
-  .zombie.chilled .z-emoji::after{content:'❄️';position:absolute;top:-12px;right:-14px;font-size:17px}
-  @keyframes bob{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-5px) rotate(2deg)}}
-  .zombie .z-char{background:#ffe14d;color:#1d2b0e;border:3px solid #ffffff;box-shadow:0 0 0 2px #b8860b,0 3px 8px rgba(0,0,0,.5);border-radius:10px;font-family:"KaiTi","STKaiti",serif;font-weight:900;font-size:25px;line-height:1.3;padding:3px 11px;margin-top:-4px}
+  .zombie{position:absolute;width:66px;margin-left:-8px;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .12s linear}
+  .zombie .z-emoji{position:relative;line-height:0;animation:zbob .58s ease-in-out infinite alternate}
+  .zombie .z-svg{width:47px;height:66px;display:block;overflow:visible;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(var(--zhue,0deg));transition:filter .12s}
+  .zombie.chilled .z-svg{filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(145deg) saturate(.45) brightness(1.28)}
+  .zombie.chilled .z-emoji::after{content:'❄️';position:absolute;top:-10px;right:-10px;font-size:17px;line-height:1}
+  .zombie.hitflash .z-svg{filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) brightness(1.9) saturate(.35)}
+  @keyframes zbob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+  /* Walk cycle: legs step, arms reach, head nods — each zombie gets its
+     own phase via --zphase so they never march in sync. */
+  .z-svg .z-legf{transform-box:view-box;transform-origin:63px 104px;animation:zstep .58s ease-in-out infinite alternate;animation-delay:var(--zphase,0s)}
+  .z-svg .z-legb{transform-box:view-box;transform-origin:79px 104px;animation:zstep .58s ease-in-out infinite alternate-reverse;animation-delay:var(--zphase,0s)}
+  @keyframes zstep{from{transform:rotate(12deg)}to{transform:rotate(-14deg)}}
+  .z-svg .z-armf{transform-box:view-box;transform-origin:63px 60px;animation:zreach 1.16s ease-in-out infinite;animation-delay:var(--zphase,0s)}
+  .z-svg .z-armb{transform-box:view-box;transform-origin:85px 62px;animation:zreach 1.16s ease-in-out infinite reverse;animation-delay:var(--zphase,0s)}
+  @keyframes zreach{0%,100%{transform:rotate(1deg)}50%{transform:rotate(-8deg)}}
+  .z-svg .z-head{transform-box:view-box;transform-origin:56px 50px;animation:znod 1.16s ease-in-out infinite;animation-delay:var(--zphase,0s)}
+  @keyframes znod{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg)}}
+  /* Eating: legs stop, arms grab, head chomps down */
+  .zombie.eating .z-emoji{animation-play-state:paused}
+  .zombie.eating .z-svg .z-legf,.zombie.eating .z-svg .z-legb{animation-play-state:paused}
+  .zombie.eating .z-svg .z-head{animation:zchomp .26s ease-in-out infinite}
+  @keyframes zchomp{0%,100%{transform:rotate(0deg)}50%{transform:rotate(8deg) translateY(2px)}}
+  .zombie.eating .z-svg .z-armf{animation:zgrab .26s ease-in-out infinite}
+  .zombie.eating .z-svg .z-armb{animation:zgrab .26s ease-in-out infinite reverse}
+  @keyframes zgrab{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-13deg)}}
+  /* Beaten: fall over backwards and fade away */
+  .zombie.dying .z-emoji{animation:zfall .62s ease-in forwards;transform-origin:50% 100%}
+  @keyframes zfall{25%{transform:rotate(4deg);opacity:1}100%{transform:rotate(78deg) translateY(8px);opacity:0}}
+  .zombie .z-char{background:#ffe14d;color:#1d2b0e;border:3px solid #ffffff;box-shadow:0 0 0 2px #b8860b,0 3px 8px rgba(0,0,0,.5);border-radius:10px;font-family:"KaiTi","STKaiti",serif;font-weight:900;font-size:25px;line-height:1.3;padding:3px 11px;margin-top:-14px}
   .zombie .z-hp{width:46px;height:7px;background:rgba(0,0,0,.3);border-radius:99px;overflow:hidden;margin-top:3px}
   .zombie .z-hp i{display:block;height:100%;background:#ff5a5a}
-  .zombie .z-emoji{position:relative}
-  .zombie .z-acc{position:absolute;line-height:1;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
-  .zombie .z-acc.hat{top:-13px;left:50%;transform:translateX(-50%);font-size:27px}
-  .zombie .z-acc.front{bottom:-4px;right:-13px;font-size:25px}
-  .zombie .z-acc.side{top:-8px;right:-15px;font-size:25px}
-  .zombie.z-small .z-emoji{font-size:36px}
-  .zombie.z-small{height:76px}
+  .zombie.z-small .z-svg{width:35px;height:50px}
   .zombie.vaulting .z-emoji{animation:vaultHop .45s ease-out}
   @keyframes vaultHop{40%{transform:translateY(-26px) rotate(6deg)}}
+  .lawn.shake{animation:shakeLawn .4s ease-out}
+  @keyframes shakeLawn{0%,100%{transform:translate(0,0)}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,-1px)}80%{transform:translate(2px,1px)}}
+  /* Plant life: shooters kick back when they fire, peas splat on hit,
+     sunflowers pop a little sun, walnuts crack as they get chewed */
+  .cell .plant-emoji.fired{animation:recoil .22s ease-out}
+  @keyframes recoil{30%{transform:translateX(-3px) scale(1.14,.88) rotate(-3deg)}100%{transform:translateX(0) scale(1)}}
+  .splat{position:absolute;width:28px;height:28px;z-index:5;pointer-events:none;animation:splatPop .38s ease-out forwards}
+  .splat svg{width:100%;height:100%;display:block}
+  .splat.ice{filter:hue-rotate(150deg) brightness(1.3)}
+  @keyframes splatPop{0%{transform:scale(.4);opacity:1}70%{opacity:1}100%{transform:scale(1.55) translateY(4px);opacity:0}}
+  .sun-pop{position:absolute;width:36px;height:36px;z-index:6;pointer-events:none;animation:sunPop 1s ease-out forwards}
+  .sun-pop svg{width:100%;height:100%;display:block}
+  @keyframes sunPop{0%{transform:scale(.3);opacity:0}25%{opacity:1;transform:scale(1.05)}100%{transform:translateY(-30px) scale(1);opacity:0}}
+  .plant-emoji .crack{opacity:0;transition:opacity .4s}
+  .plant-emoji.hurt1 .crack1{opacity:1}
+  .plant-emoji.hurt2 .crack1,.plant-emoji.hurt2 .crack2{opacity:1}
+  .sf-petals{transform-box:view-box;transform-origin:50px 33px;animation:sfspin 26s linear infinite}
+  @keyframes sfspin{to{transform:rotate(360deg)}}
+  #startZombie{display:inline-block;vertical-align:-16px;line-height:0}
+  #startZombie .z-svg{width:46px;height:65px}
+  /* Squash （冬瓜/倭瓜）: crouch, leap in an arc, slam down flat */
+  .squash-fly{position:absolute;z-index:8;width:64px;height:64px;pointer-events:none;animation:squashJump .95s cubic-bezier(.3,.6,.4,1) forwards}
+  .squash-fly svg{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 6px rgba(0,0,0,.3))}
+  @keyframes squashJump{0%{transform:translate(0,0) scale(1,1)}16%{transform:translate(0,5px) scale(1.14,.8)}40%{transform:translate(calc(var(--dx)*.45),-92px) scale(.93,1.09) rotate(-5deg)}56%{transform:translate(calc(var(--dx)*.88),-100px) scale(1,1) rotate(3deg)}70%{transform:translate(var(--dx),4px) scale(1.05,.95)}78%{transform:translate(var(--dx),9px) scale(1.3,.48)}88%{transform:translate(var(--dx),9px) scale(1.3,.48);opacity:1}100%{transform:translate(var(--dx),11px) scale(1.34,.44);opacity:0}}
+  .thud-ring{position:absolute;z-index:7;border:5px solid rgba(122,90,40,.5);border-radius:50%;pointer-events:none;animation:thudRing .5s ease-out forwards}
+  @keyframes thudRing{from{transform:scale(.25);opacity:1}to{transform:scale(1.15);opacity:0}}
+  .zombie.squashed .z-emoji{animation:sqflat .75s ease-out forwards;transform-origin:50% 100%}
+  .zombie.squashed .z-char,.zombie.squashed .z-hp{opacity:0;transition:opacity .15s}
+  @keyframes sqflat{0%{transform:scale(1,1)}22%{transform:scale(1.28,.13)}68%{transform:scale(1.34,.11);opacity:1}100%{transform:scale(1.34,.11);opacity:0}}
   .pea{position:absolute;width:18px;height:18px;background:#2ecc40;border:3px solid #a8ffb0;border-radius:50%;z-index:4;box-shadow:0 2px 6px rgba(0,0,0,.25)}
   .sun-token{position:absolute;z-index:6;width:68px;height:68px;border:none;background:transparent;padding:0;animation:dropIn .4s;filter:drop-shadow(0 4px 9px rgba(255,150,0,.5))}
   .sun-token svg{width:100%;height:100%;display:block;animation:spinSun 16s linear infinite}
@@ -147,7 +193,7 @@
     .plant-card b{font-size:15px}
   }
   @media(max-width:520px){
-    h1{font-size:23px}.lawn{height:300px}.cell{font-size:36px}.zombie .z-emoji{font-size:44px}
+    h1{font-size:23px}.lawn{height:300px}.cell{font-size:36px}.zombie .z-svg{width:42px;height:59px}.zombie .z-char{font-size:21px;padding:2px 9px;margin-top:-12px}
     .words{grid-template-columns:repeat(4,1fr)} .big-char{width:64px;height:64px;font-size:42px}
     .word-banner{grid-template-columns:64px minmax(0,1fr);align-items:start;gap:10px}
     .wb-actions{grid-column:1/-1;flex-direction:row;width:100%}
@@ -177,10 +223,8 @@
     .lawn-wrap{margin-top:6px}
     .lawn{height:clamp(196px,calc(100dvh - 238px),330px);border-radius:16px;border-width:4px}
     .cell .plant-emoji svg{width:42px;height:42px}
-    .zombie .z-emoji{font-size:38px}
+    .zombie .z-svg{width:33px;height:46px}
     .zombie .z-char{font-size:17px;padding:1px 7px;border-width:2px}
-    .zombie .z-acc.hat{font-size:20px;top:-9px}
-    .zombie .z-acc.front,.zombie .z-acc.side{font-size:19px}
     .sun-token{width:56px;height:56px}
     .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:6px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
     .plant-card{padding:5px 2px 4px;border-width:3px;border-radius:14px}
@@ -201,6 +245,7 @@
     .word-banner{padding:10px 12px}
     .lawn{height:clamp(300px,calc(100dvh - 372px),520px)}
     .cell .plant-emoji svg{width:60px;height:60px}
+    .zombie .z-svg{width:54px;height:76px}
     .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:7px;margin-top:10px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:7px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
     .plant-card{padding:7px 2px 6px}
     .plant-card .pe svg{width:48px;height:48px}
@@ -239,10 +284,8 @@
   body.land .lawn-wrap{margin-top:6px}
   body.land .lawn{height:clamp(196px,calc(100dvh - 238px),330px);border-radius:16px;border-width:4px}
   body.land .cell .plant-emoji svg{width:42px;height:42px}
-  body.land .zombie .z-emoji{font-size:38px}
+  body.land .zombie .z-svg{width:33px;height:46px}
   body.land .zombie .z-char{font-size:17px;padding:1px 7px;border-width:2px}
-  body.land .zombie .z-acc.hat{font-size:20px;top:-9px}
-  body.land .zombie .z-acc.front,body.land .zombie .z-acc.side{font-size:19px}
   body.land .sun-token{width:56px;height:56px}
   body.land .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:6px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
   body.land .plant-card{padding:5px 2px 4px;border-width:3px;border-radius:14px}
@@ -309,7 +352,7 @@
   <!-- Shop -->
   <div class="shop" id="shop">
     <button class="plant-card selected" data-plant="sunflower">
-      <span class="pe">🌻</span><b>向日葵</b><span class="cost">☀️ 50</span>
+      <span class="pe"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M50 90 C49 78 49 66 50 54" stroke="#4da11d" stroke-width="5.5" fill="none" stroke-linecap="round"/><g class="sf-petals"><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(30 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(60 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(90 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(120 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(150 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(180 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(210 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(240 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(270 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(300 50 33)"/><ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate(330 50 33)"/></g><circle cx="50" cy="33" r="16.5" fill="#8a5a2b"/><circle cx="43" cy="27" r="1.6" fill="#6e4520"/><circle cx="57" cy="25" r="1.6" fill="#6e4520"/><circle cx="50" cy="29" r="1.6" fill="#6e4520"/><circle cx="44" cy="40" r="1.6" fill="#6e4520"/><circle cx="58" cy="38" r="1.6" fill="#6e4520"/><ellipse cx="43.5" cy="32" rx="2.7" ry="3.8" fill="#2e1a08"/><ellipse cx="56.5" cy="32" rx="2.7" ry="3.8" fill="#2e1a08"/><circle cx="44.4" cy="30.6" r="1" fill="#ffffff"/><circle cx="57.4" cy="30.6" r="1" fill="#ffffff"/><path d="M44 38.5 Q50 43.5 56 38.5" stroke="#2e1a08" stroke-width="2.6" fill="none" stroke-linecap="round"/><ellipse cx="37.5" cy="37" rx="3.4" ry="2.3" fill="#e8906a" opacity=".6"/><ellipse cx="62.5" cy="37" rx="3.4" ry="2.3" fill="#e8906a" opacity=".6"/></svg></span><b>向日葵</b><span class="cost">☀️ 50</span>
     </button>
     <button class="plant-card" data-plant="peashooter">
       <span class="pe"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#5cbb2e"/><path d="M37 17 C30 3 16 1 6 6 C10 18 24 24 37 20 Z" fill="#57b325"/><rect x="54" y="26" width="33" height="18" rx="9" fill="#5fb52e"/><ellipse cx="88" cy="35" rx="7" ry="11" fill="#4da11d"/><ellipse cx="89.5" cy="35" rx="3.8" ry="7" fill="#2e6b12"/><circle cx="43" cy="35" r="25" fill="#63c733"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".35" transform="rotate(-18 35 25)"/><ellipse cx="50" cy="29" rx="3.4" ry="5" fill="#22380f"/><circle cx="51.4" cy="26.6" r="1.2" fill="#ffffff"/></svg></span><b>豌豆射手</b><span class="cost">☀️ 100</span>
@@ -350,7 +393,7 @@
 <!-- Start -->
 <div class="overlay" id="startOverlay">
   <div class="dialog">
-    <div style="font-size:56px">🌻 🧟 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:52px;height:52px;vertical-align:-6px"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#5cbb2e"/><path d="M37 17 C30 3 16 1 6 6 C10 18 24 24 37 20 Z" fill="#57b325"/><rect x="54" y="26" width="33" height="18" rx="9" fill="#5fb52e"/><ellipse cx="88" cy="35" rx="7" ry="11" fill="#4da11d"/><ellipse cx="89.5" cy="35" rx="3.8" ry="7" fill="#2e6b12"/><circle cx="43" cy="35" r="25" fill="#63c733"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".35" transform="rotate(-18 35 25)"/><ellipse cx="50" cy="29" rx="3.4" ry="5" fill="#22380f"/><circle cx="51.4" cy="26.6" r="1.2" fill="#ffffff"/></svg></div>
+    <div style="font-size:56px">🌻 <span id="startZombie"></span> <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:52px;height:52px;vertical-align:-6px"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#5cbb2e"/><path d="M37 17 C30 3 16 1 6 6 C10 18 24 24 37 20 Z" fill="#57b325"/><rect x="54" y="26" width="33" height="18" rx="9" fill="#5fb52e"/><ellipse cx="88" cy="35" rx="7" ry="11" fill="#4da11d"/><ellipse cx="89.5" cy="35" rx="3.8" ry="7" fill="#2e6b12"/><circle cx="43" cy="35" r="25" fill="#63c733"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".35" transform="rotate(-18 35 25)"/><ellipse cx="50" cy="29" rx="3.4" ry="5" fill="#22380f"/><circle cx="51.4" cy="26.6" r="1.2" fill="#ffffff"/></svg></div>
     <h2>植物守卫小花园</h2>
     <p>僵尸慢慢走过来啦！种下植物保护小房子，<br>一边玩，一边认识汉字宝宝。</p>
     <div class="how">
@@ -511,14 +554,15 @@ var WORDS=[
 var PEASHOOTER_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#5cbb2e"/><path d="M37 17 C30 3 16 1 6 6 C10 18 24 24 37 20 Z" fill="#57b325"/><rect x="54" y="26" width="33" height="18" rx="9" fill="#5fb52e"/><ellipse cx="88" cy="35" rx="7" ry="11" fill="#4da11d"/><ellipse cx="89.5" cy="35" rx="3.8" ry="7" fill="#2e6b12"/><circle cx="43" cy="35" r="25" fill="#63c733"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".35" transform="rotate(-18 35 25)"/><ellipse cx="50" cy="29" rx="3.4" ry="5" fill="#22380f"/><circle cx="51.4" cy="26.6" r="1.2" fill="#ffffff"/></svg>';
 var GATLING_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#5cbb2e"/><rect x="54" y="20" width="32" height="8" rx="4" fill="#57b325"/><rect x="54" y="31" width="32" height="8" rx="4" fill="#57b325"/><rect x="54" y="42" width="32" height="8" rx="4" fill="#57b325"/><rect x="54" y="53" width="32" height="8" rx="4" fill="#57b325"/><ellipse cx="87" cy="24" rx="3.6" ry="4" fill="#2e6b12"/><ellipse cx="87" cy="35" rx="3.6" ry="4" fill="#2e6b12"/><ellipse cx="87" cy="46" rx="3.6" ry="4" fill="#2e6b12"/><ellipse cx="87" cy="57" rx="3.6" ry="4" fill="#2e6b12"/><circle cx="43" cy="35" r="25" fill="#63c733"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".35" transform="rotate(-18 35 25)"/><path d="M19 31 A24.5 24.5 0 0 1 67 31 Z" fill="#96762f"/><rect x="14" y="29" width="58" height="6" rx="3" fill="#75591f"/><ellipse cx="50" cy="44" rx="3.2" ry="4.8" fill="#22380f"/><circle cx="51.2" cy="41.8" r="1.1" fill="#ffffff"/></svg>';
 var SUN_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(30 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00" transform="rotate(60 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(90 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00" transform="rotate(120 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(150 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00" transform="rotate(180 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(210 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00" transform="rotate(240 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(270 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ff8a00" transform="rotate(300 50 50)"/><path d="M50 3 L57 28 L43 28 Z" fill="#ffb800" transform="rotate(330 50 50)"/><circle cx="50" cy="50" r="24" fill="#ffb800" stroke="#ff8a00" stroke-width="3"/><circle cx="50" cy="50" r="18" fill="#ffe066"/></svg>';
-var WALLNUT_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="50" cy="93" rx="30" ry="5" fill="#000000" opacity=".12"/><path d="M50 5 C71 5 87 23 87 49 C87 75 71 95 50 95 C29 95 13 75 13 49 C13 23 29 5 50 5 Z" fill="#d29a55"/><path d="M87 49 C87 75 71 95 50 95 C40 95 31 90 24 81 C38 88 58 86 71 74 C82 64 87 50 86 35 C86.7 39.5 87 44.2 87 49 Z" fill="#b57a38" opacity=".45"/><ellipse cx="33" cy="24" rx="11" ry="7" fill="#ffffff" opacity=".35" transform="rotate(-22 33 24)"/><circle cx="74" cy="66" r="3.2" fill="#a06a2c" opacity=".35"/><circle cx="24" cy="58" r="2.4" fill="#a06a2c" opacity=".3"/><circle cx="66" cy="84" r="2.2" fill="#a06a2c" opacity=".3"/><ellipse cx="38" cy="40" rx="7.5" ry="10" fill="#ffffff"/><ellipse cx="62" cy="40" rx="7.5" ry="10" fill="#ffffff"/><circle cx="39.5" cy="36" r="4.2" fill="#2b1a0c"/><circle cx="63.5" cy="36" r="4.2" fill="#2b1a0c"/><circle cx="41" cy="34.4" r="1.4" fill="#ffffff"/><circle cx="65" cy="34.4" r="1.4" fill="#ffffff"/><path d="M41 63 Q50 70 59 63" stroke="#6b4423" stroke-width="3.4" stroke-linecap="round" fill="none"/><ellipse cx="27" cy="55" rx="5" ry="3.4" fill="#e8906a" opacity=".55"/><ellipse cx="73" cy="55" rx="5" ry="3.4" fill="#e8906a" opacity=".55"/></svg>';
+var SUNFLOWER_SVG=(function(){ var p=''; for(var a=0;a<360;a+=30){ p+='<ellipse cx="50" cy="14.5" rx="7.5" ry="13.5" fill="#ffb800" stroke="#f59e0b" stroke-width="1.6" transform="rotate('+a+' 50 33)"/>'; } return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M50 90 C49 78 49 66 50 54" stroke="#4da11d" stroke-width="5.5" fill="none" stroke-linecap="round"/><g class="sf-petals">'+p+'</g><circle cx="50" cy="33" r="16.5" fill="#8a5a2b"/><circle cx="43" cy="27" r="1.6" fill="#6e4520"/><circle cx="57" cy="25" r="1.6" fill="#6e4520"/><circle cx="50" cy="29" r="1.6" fill="#6e4520"/><circle cx="44" cy="40" r="1.6" fill="#6e4520"/><circle cx="58" cy="38" r="1.6" fill="#6e4520"/><ellipse cx="43.5" cy="32" rx="2.7" ry="3.8" fill="#2e1a08"/><ellipse cx="56.5" cy="32" rx="2.7" ry="3.8" fill="#2e1a08"/><circle cx="44.4" cy="30.6" r="1" fill="#ffffff"/><circle cx="57.4" cy="30.6" r="1" fill="#ffffff"/><path d="M44 38.5 Q50 43.5 56 38.5" stroke="#2e1a08" stroke-width="2.6" fill="none" stroke-linecap="round"/><ellipse cx="37.5" cy="37" rx="3.4" ry="2.3" fill="#e8906a" opacity=".6"/><ellipse cx="62.5" cy="37" rx="3.4" ry="2.3" fill="#e8906a" opacity=".6"/></svg>'; })();
+var WALLNUT_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="50" cy="93" rx="30" ry="5" fill="#000000" opacity=".12"/><path d="M50 5 C71 5 87 23 87 49 C87 75 71 95 50 95 C29 95 13 75 13 49 C13 23 29 5 50 5 Z" fill="#d29a55"/><path d="M87 49 C87 75 71 95 50 95 C40 95 31 90 24 81 C38 88 58 86 71 74 C82 64 87 50 86 35 C86.7 39.5 87 44.2 87 49 Z" fill="#b57a38" opacity=".45"/><ellipse cx="33" cy="24" rx="11" ry="7" fill="#ffffff" opacity=".35" transform="rotate(-22 33 24)"/><circle cx="74" cy="66" r="3.2" fill="#a06a2c" opacity=".35"/><circle cx="24" cy="58" r="2.4" fill="#a06a2c" opacity=".3"/><circle cx="66" cy="84" r="2.2" fill="#a06a2c" opacity=".3"/><ellipse cx="38" cy="40" rx="7.5" ry="10" fill="#ffffff"/><ellipse cx="62" cy="40" rx="7.5" ry="10" fill="#ffffff"/><circle cx="39.5" cy="36" r="4.2" fill="#2b1a0c"/><circle cx="63.5" cy="36" r="4.2" fill="#2b1a0c"/><circle cx="41" cy="34.4" r="1.4" fill="#ffffff"/><circle cx="65" cy="34.4" r="1.4" fill="#ffffff"/><path d="M41 63 Q50 70 59 63" stroke="#6b4423" stroke-width="3.4" stroke-linecap="round" fill="none"/><ellipse cx="27" cy="55" rx="5" ry="3.4" fill="#e8906a" opacity=".55"/><ellipse cx="73" cy="55" rx="5" ry="3.4" fill="#e8906a" opacity=".55"/><g class="crack crack1"><path d="M29 16 L36 29 L30 41 L37 53" stroke="#7d5326" stroke-width="2.4" fill="none" stroke-linecap="round"/></g><g class="crack crack2"><path d="M69 20 L62 33 L70 45 L62 57 M36 29 L49 35 L62 33" stroke="#7d5326" stroke-width="2.4" fill="none" stroke-linecap="round"/></g></svg>';
 var CHERRY_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M38 48 C42 30 54 18 72 12" stroke="#4da11d" stroke-width="4.5" fill="none" stroke-linecap="round"/><path d="M68 54 C66 38 68 24 72 12" stroke="#4da11d" stroke-width="4.5" fill="none" stroke-linecap="round"/><path d="M72 12 C80 3 93 3 97 8 C93 16 81 19 72 12 Z" fill="#57b325"/><circle cx="35" cy="68" r="23" fill="#e03428"/><path d="M58 68 C58 81 48 91 35 91 C30 91 25 89 21 86 C33 88 46 82 52 71 C55 65 56 58 55 51 C57 56 58 62 58 68 Z" fill="#b81f16" opacity=".45"/><circle cx="71" cy="74" r="17" fill="#ef4438"/><ellipse cx="27" cy="57" rx="7" ry="4.5" fill="#ffffff" opacity=".45" transform="rotate(-24 27 57)"/><ellipse cx="64" cy="65" rx="4.6" ry="3" fill="#ffffff" opacity=".45" transform="rotate(-24 64 65)"/><path d="M24 58 L33 61" stroke="#7d130c" stroke-width="3" stroke-linecap="round"/><path d="M46 58 L37 61" stroke="#7d130c" stroke-width="3" stroke-linecap="round"/><circle cx="29" cy="67" r="3" fill="#2b0d0a"/><circle cx="41" cy="67" r="3" fill="#2b0d0a"/><ellipse cx="35" cy="78" rx="4.6" ry="5.6" fill="#7d130c"/><ellipse cx="66" cy="73" rx="2.2" ry="2.6" fill="#2b0d0a"/><ellipse cx="76" cy="73" rx="2.2" ry="2.6" fill="#2b0d0a"/><path d="M67 83 Q71 80 75 83" stroke="#7d130c" stroke-width="2.6" stroke-linecap="round" fill="none"/><circle cx="86" cy="26" r="3" fill="#ffb800"/><circle cx="92" cy="36" r="2.2" fill="#ff8a00"/><circle cx="82" cy="38" r="1.8" fill="#ffb800"/></svg>';
 var JALAPENO_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M57 20 C76 27 85 46 77 66 C69 86 49 97 27 95 C43 87 56 72 58 53 C59 41 59 29 57 20 Z" fill="#e03428"/><path d="M77 66 C69 86 49 97 27 95 C33 92 39 88 44 83 C58 80 70 68 75 52 C77 57 78 61 77 66 Z" fill="#b81f16" opacity=".45"/><ellipse cx="63" cy="40" rx="5" ry="9" fill="#ffffff" opacity=".35" transform="rotate(18 63 40)"/><path d="M45 22 C45 11 55 4 67 6 C61 11 60 16 62 23 C55 26 48 25 45 22 Z" fill="#4da11d"/><path d="M56 8 C60 2 68 0 73 2 C68 5 64 8 62 12" stroke="#57b325" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="50" cy="47" r="3" fill="#2b0d0a"/><circle cx="63" cy="44" r="3" fill="#2b0d0a"/><path d="M51 58 Q57 63 64 57" stroke="#7d130c" stroke-width="3" stroke-linecap="round" fill="none"/><ellipse cx="42" cy="55" rx="4.4" ry="3" fill="#ff9d7a" opacity=".6"/><path d="M88 62 C92 68 92 74 88 79 C84 74 84 68 88 62 Z" fill="#ff8a00"/><path d="M89 69 C91 72 91 75 89 78 C87 75 87 72 89 69 Z" fill="#ffd93d"/><path d="M14 66 C17 71 17 76 14 80 C11 76 11 71 14 66 Z" fill="#ff8a00"/><path d="M14.5 72 C16 74 16 76 14.5 78 C13 76 13 74 14.5 72 Z" fill="#ffd93d"/></svg>';
 var CATTAIL_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 76 45 66 44 54 L54 54 C52 66 52 76 53 88 Z" fill="#5cbb2e"/><path d="M76 84 C75 64 75 50 76 36" stroke="#4da11d" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="69" y="4" width="14" height="34" rx="7" fill="#8b5e3c"/><ellipse cx="73" cy="14" rx="3" ry="7" fill="#ffffff" opacity=".25"/><path d="M27 32 L22 11 L43 21 Z" fill="#f28bb4"/><path d="M57 32 L62 11 L41 21 Z" fill="#f28bb4"/><circle cx="42" cy="42" r="21" fill="#f7a8c4"/><path d="M27 24 L24.5 14 L36 19 Z" fill="#ffd1e3"/><path d="M57 24 L59.5 14 L48 19 Z" fill="#ffd1e3"/><ellipse cx="34" cy="32" rx="8" ry="5" fill="#ffffff" opacity=".35" transform="rotate(-18 34 32)"/><ellipse cx="35" cy="41" rx="3.2" ry="4.8" fill="#22380f"/><ellipse cx="49" cy="41" rx="3.2" ry="4.8" fill="#22380f"/><circle cx="36.2" cy="38.8" r="1.1" fill="#ffffff"/><circle cx="50.2" cy="38.8" r="1.1" fill="#ffffff"/><path d="M42 46 L39.5 49.5 L44.5 49.5 Z" fill="#e75480"/><path d="M37 54 Q42 57.5 47 54" stroke="#a03a5c" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M13 43 L24 45 M13 51 L24 49 M60 45 L68 43 M60 49 L68 51" stroke="#a03a5c" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="28" cy="50" rx="4.4" ry="3" fill="#f28bb4" opacity=".6"/><ellipse cx="56" cy="50" rx="4.4" ry="3" fill="#f28bb4" opacity=".6"/></svg>';
 var SNOWPEA_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 89 C40 79 25 77 13 85 C23 93 39 95 50 91 Z" fill="#4da11d"/><path d="M50 89 C60 79 75 77 87 85 C77 93 61 95 50 91 Z" fill="#57b325"/><path d="M50 91 C45 83 37 80 27 82 C33 90 43 94 50 93 Z" fill="#6abe30"/><path d="M50 91 C55 83 63 80 73 82 C67 90 57 94 50 93 Z" fill="#7ed957"/><path d="M45 88 C46 72 46 58 45 42 L57 42 C55 58 55 72 56 88 Z" fill="#3d9db8"/><path d="M37 17 C30 3 16 1 6 6 C10 18 24 24 37 20 Z" fill="#57b325"/><rect x="54" y="26" width="33" height="18" rx="9" fill="#4aa3e0"/><ellipse cx="88" cy="35" rx="7" ry="11" fill="#2f7fb8"/><ellipse cx="89.5" cy="35" rx="3.8" ry="7" fill="#174a6e"/><circle cx="43" cy="35" r="25" fill="#79c7f2"/><ellipse cx="35" cy="25" rx="9" ry="5.5" fill="#ffffff" opacity=".5" transform="rotate(-18 35 25)"/><ellipse cx="50" cy="29" rx="3.4" ry="5" fill="#14344d"/><circle cx="51.4" cy="26.6" r="1.2" fill="#ffffff"/><path d="M22 8 L22 24 M14 16 L30 16 M16.5 10.5 L27.5 21.5 M27.5 10.5 L16.5 21.5" stroke="#bfe9ff" stroke-width="2.6" stroke-linecap="round"/><circle cx="66" cy="12" r="2.2" fill="#dff3ff"/><circle cx="74" cy="19" r="1.7" fill="#bfe9ff"/></svg>';
 var WINTERMELON_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="50" cy="94" rx="27" ry="4.5" fill="#000000" opacity=".12"/><path d="M50 13 C67 13 79 31 79 54 C79 77 67 93 50 93 C33 93 21 77 21 54 C21 31 33 13 50 13 Z" fill="#a9c98d"/><path d="M79 54 C79 77 67 93 50 93 C43 93 37 90 32 84 C47 89 63 82 71 68 C77 58 78 44 75 31 C77.5 38 79 46 79 54 Z" fill="#7fa663" opacity=".4"/><path d="M37 18 C32 36 32 70 38 88" stroke="#7fa663" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/><path d="M63 18 C68 36 68 70 62 88" stroke="#7fa663" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/><ellipse cx="36" cy="30" rx="7" ry="12" fill="#ffffff" opacity=".38" transform="rotate(-14 36 30)"/><path d="M50 13 C50 8 53 4 58 3" stroke="#5c8a3c" stroke-width="4.5" fill="none" stroke-linecap="round"/><path d="M58 4 C66 -1 76 1 79 5 C74 11 64 11 58 4 Z" fill="#57b325"/><ellipse cx="40" cy="52" rx="3.4" ry="5" fill="#22380f"/><ellipse cx="60" cy="52" rx="3.4" ry="5" fill="#22380f"/><circle cx="41.2" cy="49.8" r="1.2" fill="#ffffff"/><circle cx="61.2" cy="49.8" r="1.2" fill="#ffffff"/><path d="M43 66 Q50 72 57 66" stroke="#3e5f27" stroke-width="3.2" stroke-linecap="round" fill="none"/><ellipse cx="31" cy="63" rx="4.6" ry="3.1" fill="#f2a65a" opacity=".55"/><ellipse cx="69" cy="63" rx="4.6" ry="3.1" fill="#f2a65a" opacity=".55"/></svg>';
 var PLANTS={
- sunflower:{emoji:'🌻',name:'向日葵',cost:50,hp:6},
+ sunflower:{emoji:SUNFLOWER_SVG,name:'向日葵',cost:50,hp:6},
  peashooter:{emoji:PEASHOOTER_SVG,name:'豌豆射手',cost:100,hp:6},
  snowpea:{emoji:SNOWPEA_SVG,name:'寒冰射手',cost:175,hp:6},
  gatling:{emoji:GATLING_SVG,name:'机枪射手',cost:150,hp:8,upgradeFrom:'peashooter'},
@@ -680,12 +724,34 @@ function tone(freq,delay,dur,type,vol){
   g.gain.setValueAtTime(vol||0.15,t); g.gain.exponentialRampToValueAtTime(0.001,t+dur);
   o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+dur+0.05);
 }
+function slideTone(f1,f2,delay,dur,type,vol){
+  if(!actx) return;
+  var t=actx.currentTime+delay, o=actx.createOscillator(), g=actx.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(Math.max(30,f2),t+dur);
+  g.gain.setValueAtTime(vol||0.15,t); g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+dur+0.05);
+}
 function sfx(kind){
   if(!state.sound) return; ensureAudio(); if(!actx) return;
   if(kind==='pop'){ tone(320,0,0.12,'triangle',0.2); tone(520,0.06,0.12,'triangle',0.18); }
   else if(kind==='ding'){ tone(880,0,0.18,'sine',0.16); tone(1320,0.08,0.22,'sine',0.14); }
   else if(kind==='win'){ tone(523,0,0.16,'triangle',0.18); tone(659,0.12,0.16,'triangle',0.18); tone(784,0.24,0.28,'triangle',0.2); }
   else if(kind==='boom'){ tone(110,0,0.45,'sawtooth',0.28); tone(64,0.04,0.5,'square',0.22); tone(220,0,0.18,'triangle',0.15); tone(880,0.1,0.14,'sine',0.1); }
+  /* Original-game style effects, all synthesized — no audio files, so
+     the single-file offline copy keeps every sound. */
+  else if(kind==='shoot'){ slideTone(620,240,0,0.09,'square',0.07); }
+  else if(kind==='spike'){ slideTone(900,300,0,0.07,'square',0.06); }
+  else if(kind==='splat'){ tone(170,0,0.06,'square',0.1); tone(120,0.02,0.07,'triangle',0.1); }
+  else if(kind==='chomp'){ tone(150,0,0.07,'square',0.13); tone(110,0.09,0.08,'square',0.11); }
+  else if(kind==='groan'){ slideTone(140,80,0,0.55,'sawtooth',0.05); slideTone(120,70,0.2,0.4,'sawtooth',0.04); }
+  else if(kind==='jump'){ slideTone(220,660,0,0.28,'triangle',0.16); }
+  else if(kind==='thud'){ tone(72,0,0.32,'sine',0.4); tone(52,0.02,0.36,'sine',0.3); tone(180,0,0.06,'square',0.1); }
+  else if(kind==='fire'){ slideTone(300,90,0,0.5,'sawtooth',0.15); tone(500,0,0.2,'sawtooth',0.07); tone(240,0.15,0.3,'sawtooth',0.09); }
+  else if(kind==='freeze'){ tone(1560,0,0.1,'sine',0.07); tone(1180,0.06,0.12,'sine',0.06); tone(1760,0.12,0.14,'sine',0.05); }
+  else if(kind==='twinkle'){ tone(1180,0,0.1,'sine',0.07); tone(1568,0.07,0.16,'sine',0.06); }
+  else if(kind==='fall'){ slideTone(320,70,0,0.4,'triangle',0.13); }
+  else if(kind==='boing'){ slideTone(180,520,0,0.16,'sine',0.13); slideTone(520,240,0.14,0.18,'sine',0.09); }
+  else if(kind==='rip'){ tone(900,0,0.05,'square',0.08); tone(700,0.05,0.05,'square',0.08); tone(500,0.1,0.07,'square',0.09); tone(300,0.16,0.09,'square',0.09); }
 }
 document.addEventListener('pointerdown',function(){ ensureAudio(); preloadClips(); },false);
 function tip(t){$('tipText').textContent=t}
@@ -724,7 +790,7 @@ function cellEl(r,c){return cellsEl.children[r*COLS+c]}
 function renderGrid(){
   for(var r=0;r<ROWS;r++) for(var c=0;c<COLS;c++){
     var p=state.grid[r*COLS+c], el=cellEl(r,c);
-    if(p){ el.innerHTML='<span class="plant-emoji">'+PLANTS[p.type].emoji+'</span><span class="hp"><i style="width:'+Math.max(0,p.hp/PLANTS[p.type].hp*100)+'%"></i></span>'; el.classList.remove('hint'); }
+    if(p){ var frac=p.hp/PLANTS[p.type].hp; var hurt=(p.type==='walnut')?(frac<=0.34?' hurt2':(frac<=0.67?' hurt1':'')):''; el.innerHTML='<span class="plant-emoji'+hurt+'">'+PLANTS[p.type].emoji+'</span><span class="hp"><i style="width:'+Math.max(0,frac*100)+'%"></i></span>'; el.classList.remove('hint'); }
     else { el.innerHTML=''; el.classList.add('hint'); }
   }
   document.querySelectorAll('.plant-card').forEach(function(card){
@@ -780,18 +846,55 @@ function plantAt(r,c){
 }
 function shakeShop(){ var s=$('shop'); s.style.transform='translateX(-5px)'; setTimeout(function(){s.style.transform=''},120); setTimeout(function(){s.style.transform='translateX(5px)'},240); setTimeout(function(){s.style.transform=''},360); }
 
-var CONE_SVG='<svg viewBox="0 0 40 40" width="27" height="27" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 3 L32 33 L8 33 Z" fill="#ff8a00" stroke="#d96f00" stroke-width="2" stroke-linejoin="round"/><path d="M13.5 21 L26.5 21 L28.6 27 L11.4 27 Z" fill="#ffffff" opacity=".9"/><rect x="5" y="32" width="30" height="5" rx="2" fill="#d96f00"/></svg>';
-var POLE_SVG='<svg viewBox="0 0 40 40" width="28" height="28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="5" y1="37" x2="37" y2="3" stroke="#c98d4b" stroke-width="4.5" stroke-linecap="round"/><circle cx="37" cy="3" r="3" fill="#a06a2c"/></svg>';
+/* Hand-drawn zombie, modelled on the original game: pale green skin,
+   brown coat, red tie, arms reaching forward. Body parts are separate
+   SVG groups so CSS can walk / reach / chomp them; armor for the cone,
+   bucket and newspaper kinds rides in a .z-armor group that is removed
+   once it has soaked up its hits. */
+function zombieArt(t){
+  var s='<svg class="z-svg" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">';
+  if(t==='flag') s+='<g><line x1="103" y1="120" x2="103" y2="12" stroke="#8a6b42" stroke-width="4.5" stroke-linecap="round"/><path d="M103 13 L80 20 L103 28 Z" fill="#d63a2e"/></g>';
+  s+='<g class="z-legb"><path d="M79 104 L91 142" stroke="#59616d" stroke-width="13" stroke-linecap="round"/><ellipse cx="96" cy="149" rx="11" ry="5.5" fill="#66482a"/></g>';
+  s+='<g class="z-legf"><path d="M63 104 L49 142" stroke="#6d7581" stroke-width="13" stroke-linecap="round"/><ellipse cx="44" cy="149" rx="11" ry="5.5" fill="#755233"/></g>';
+  s+='<g class="z-armb"><path d="M85 62 L64 72" stroke="#6d5136" stroke-width="12" stroke-linecap="round"/><path d="M66 71 L48 80" stroke="#93a983" stroke-width="9.5" stroke-linecap="round"/><circle cx="46" cy="81" r="6" fill="#93a983"/></g>';
+  s+='<path d="M57 42 C49 58 47 84 51 110 L56 122 L97 122 L95 106 C101 82 99 56 88 42 C79 34 65 34 57 42 Z" fill="#7a5a38"/>';
+  s+='<path d="M88 42 C99 56 101 82 95 106 L97 122 L84 122 C92 92 92 62 84 40 Z" fill="#68492c" opacity=".55"/>';
+  s+='<path d="M65 44 L83 44 L77 76 L69 76 Z" fill="#eae5d8"/>';
+  s+='<path d="M71.5 46 L76.5 46 L75.5 62 L73.5 70 L71.5 62 Z" fill="#b03a2e"/>';
+  s+='<path d="M65 44 L58 66 M83 44 L88 64" stroke="#5d4126" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  s+='<g class="z-head">'
+    +'<ellipse cx="78" cy="33" rx="5" ry="7.5" fill="#93a983"/>'
+    +'<ellipse cx="54" cy="31" rx="25" ry="23" fill="#a9bd96"/>'
+    +'<ellipse cx="63" cy="36" rx="15" ry="17" fill="#93a983" opacity=".45"/>'
+    +'<path d="M38 10 C40 6 44 5 47 6 M50 8 C52 4 56 3 59 4 M61 9 C64 6 68 6 70 7" stroke="#4c4c38" stroke-width="2.4" fill="none" stroke-linecap="round"/>'
+    +'<circle cx="41" cy="29" r="6.8" fill="#ffffff"/><circle cx="62" cy="26.5" r="5.6" fill="#ffffff"/>'
+    +'<circle cx="38.6" cy="30" r="3.1" fill="#26301e"/><circle cx="59.8" cy="27.5" r="2.6" fill="#26301e"/>'
+    +'<circle cx="39.6" cy="28.8" r="1" fill="#ffffff"/><circle cx="60.7" cy="26.4" r=".8" fill="#ffffff"/>'
+    +'<path d="M33 21 Q41 17 48 21 M56 19 Q62 16 68 19" stroke="#7d9070" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+    +'<circle cx="43" cy="39.5" r="1.5" fill="#7d9070"/><circle cx="49" cy="39.5" r="1.5" fill="#7d9070"/>'
+    +'<ellipse cx="43" cy="47" rx="7.5" ry="5.4" fill="#5d3428" transform="rotate(-6 43 47)"/>'
+    +'<rect x="37.5" y="42.6" width="4.4" height="4.6" rx="1" fill="#f4efdd"/>'
+    +'<rect x="44.5" y="42" width="3.8" height="4" rx="1" fill="#f4efdd"/>'
+    +'<rect x="41" y="49.8" width="3.6" height="3.2" rx="1" fill="#e8e2cc"/>'
+    +(t==='cone'?'<g class="z-armor"><path d="M54 0 L69 25 L39 25 Z" fill="#ff8a00" stroke="#d96f00" stroke-width="2" stroke-linejoin="round"/><path d="M46.5 16 L61.5 16 L64.5 21.5 L43.5 21.5 Z" fill="#ffffff" opacity=".92"/></g>':'')
+    +(t==='bucket'?'<g class="z-armor"><path d="M33 25 L37 -2 L71 -2 L75 25 Z" fill="#bcc3cb" stroke="#8d959d" stroke-width="2"/><rect x="30" y="22" width="48" height="6.5" rx="2.5" fill="#9aa2ab"/><path d="M42 2 L44 20" stroke="#ffffff" stroke-width="3.4" opacity=".5" stroke-linecap="round"/></g>':'')
+    +'</g>';
+  s+='<g class="z-armf"><path d="M63 60 L36 71" stroke="#7a5a38" stroke-width="13" stroke-linecap="round"/><path d="M38 70 L18 78" stroke="#a9bd96" stroke-width="10" stroke-linecap="round"/><circle cx="15" cy="79" r="6.5" fill="#a9bd96"/><path d="M10 74 L4 71 M9.5 79 L3 79 M10.5 84 L5 87" stroke="#a9bd96" stroke-width="3" stroke-linecap="round"/></g>';
+  if(t==='newspaper') s+='<g class="z-armor" transform="rotate(-6 24 84)"><rect x="1" y="64" width="47" height="38" rx="2" fill="#f3f0e6" stroke="#c6c0ac" stroke-width="2"/><rect x="5" y="68" width="26" height="6" fill="#8f8a76"/><rect x="34" y="68" width="10" height="10" fill="#b9bfae"/><path d="M5 79 L44 79 M5 85 L44 85 M5 91 L30 91 M5 97 L38 97" stroke="#c6c0ac" stroke-width="2.4"/></g>';
+  if(t==='pole') s+='<g><path d="M16 80 L102 140" stroke="#c98d4b" stroke-width="5" stroke-linecap="round"/><circle cx="102" cy="140" r="3.4" fill="#a06a2c"/></g>';
+  s+='</svg>';
+  return s;
+}
 /* Zombie kinds: armor is extra hp worn on the head/front; when it breaks
    the accessory falls off. speedMul scales the usual slow walk. */
 var ZTYPES={
-  normal:   {acc:'',           accCls:'',      armor:0,  hpMul:1,    speedMul:1,    face:'🧟'},
-  imp:      {acc:'',           accCls:'',      armor:0,  hpMul:0.55, speedMul:1.5, small:true, face:'🧟'},
-  cone:     {acc:CONE_SVG,     accCls:'hat',   armor:6,  hpMul:1,    speedMul:1,    face:'🧟‍♂️'},
-  flag:     {acc:'🚩',        accCls:'side',  armor:0,  hpMul:1,    speedMul:1.3,  face:'🧟‍♀️'},
-  newspaper:{acc:'📰',        accCls:'front', armor:4,  hpMul:1,    speedMul:0.85, face:'🧟‍♂️'},
-  pole:     {acc:POLE_SVG,     accCls:'side',  armor:0,  hpMul:1,    speedMul:1.15, face:'🧟'},
-  bucket:   {acc:'🪣',        accCls:'hat',   armor:12, hpMul:1,    speedMul:0.9,  face:'🧟‍♀️'}
+  normal:   {armor:0,  hpMul:1,    speedMul:1},
+  imp:      {armor:0,  hpMul:0.55, speedMul:1.5, small:true},
+  cone:     {armor:6,  hpMul:1,    speedMul:1},
+  flag:     {armor:0,  hpMul:1,    speedMul:1.3},
+  newspaper:{armor:4,  hpMul:1,    speedMul:0.85},
+  pole:     {armor:0,  hpMul:1,    speedMul:1.15},
+  bucket:   {armor:12, hpMul:1,    speedMul:0.9}
 };
 function pickZombieType(){
   // new kinds unlock as levels go up; plain zombies always stay the most common
@@ -814,8 +917,10 @@ function spawnZombie(){
   state.zombies.push(z);
   var el=document.createElement('div'); el.className='zombie z-'+typeKey+(def.small?' z-small':'');
   el.style.setProperty('--zhue', Math.round(Math.random()*36-18)+'deg');
-  el.innerHTML='<div class="z-emoji">'+def.face+(def.acc?'<span class="z-acc '+def.accCls+'">'+def.acc+'</span>':'')+'</div><div class="z-char">'+z.char+'</div><div class="z-hp"><i></i></div>';
+  el.style.setProperty('--zphase', (-Math.random()*1.16).toFixed(2)+'s');
+  el.innerHTML='<div class="z-emoji">'+zombieArt(typeKey)+'</div><div class="z-char">'+z.char+'</div><div class="z-hp"><i></i></div>';
   fx.appendChild(el); z.el=el; positionZombie(z);
+  if(Math.random()<0.35) sfx('groan');
 }
 function positionZombie(z){
   if(!z.el) return;
@@ -825,8 +930,8 @@ function positionZombie(z){
   var bar=z.el.querySelector('.z-hp i'); if(bar) bar.style.width=Math.max(0,z.hp/z.maxHp*100)+'%';
   // armor (cone / bucket / newspaper) falls off once it has soaked up its hits
   if(z.armor>0 && z.hp<=z.maxHp-z.armor){
-    var acc=z.el.querySelector('.z-acc'); if(acc) acc.remove();
-    if(z.type==='newspaper' && !z.enraged){ z.enraged=true; tip('📰 报纸破啦，它生气了，走得快了些！'); }
+    var acc=z.el.querySelector('.z-armor'); if(acc) acc.remove();
+    if(z.type==='newspaper' && !z.enraged){ z.enraged=true; sfx('rip'); tip('📰 报纸破啦，它生气了，走得快了些！'); }
     z.armor=0;
   }
 }
@@ -843,20 +948,38 @@ function spawnSkySun(){
 }
 function sunflowerSun(r,c,plantEl){
   // small sun appears on sunflower cell, auto-collect after 1s for 5yo ease
-  state.sun+=25; tip('🌻 向日葵生了一个小太阳，+25 阳光！');
+  state.sun+=25; tip('🌻 向日葵生了一个小太阳，+25 阳光！'); sfx('twinkle');
   var el=cellEl(r,c); el.style.transform='scale(1.15)'; setTimeout(function(){el.style.transform=''},250);
+  var laneH=lawn.clientHeight/ROWS, cellW=(lawn.clientWidth-38)/COLS;
+  var pop=document.createElement('div'); pop.className='sun-pop'; pop.innerHTML=SUN_SVG;
+  pop.style.left=(38+c*cellW+cellW/2-18)+'px'; pop.style.top=(r*laneH+2)+'px';
+  fx.appendChild(pop); setTimeout(function(){ if(pop.parentNode) pop.remove(); },1050);
   renderGrid();
 }
-function squashWintermelon(r,c,z){
+/* Squash, like the original game: the melon crouches, leaps high in an
+   arc and slams down on the zombie, flattening it into a pancake before
+   both disappear. The flight is one CSS animation on a free copy of the
+   plant in the fx layer; the flattening lands at ~680ms, as it lands. */
+function startSquash(r,c,z){
   state.grid[r*COLS+c]=null;
   var laneH=lawn.clientHeight/ROWS, cellW=(lawn.clientWidth-38)/COLS;
-  var el=document.createElement('div'); el.className='boom-fx'; el.textContent='💥';
-  el.style.left=(38+c*cellW)+'px'; el.style.top=(r*laneH)+'px';
-  el.style.width=cellW+'px'; el.style.height=laneH+'px'; el.style.fontSize='64px';
-  fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },850);
-  sfx('boom');
-  tip('🎉 冬瓜跳起来，一屁股坐扁了一个僵尸！');
-  killZombie(z);
+  var cx=38+c*cellW+cellW/2;
+  var zx=38+(z.x/100)*(lawn.clientWidth-38)+25;
+  var el=document.createElement('div'); el.className='squash-fly'; el.innerHTML=WINTERMELON_SVG;
+  el.style.left=(cx-32)+'px'; el.style.top=(r*laneH+laneH-68)+'px';
+  el.style.setProperty('--dx',(zx-cx)+'px');
+  fx.appendChild(el);
+  sfx('jump');
+  tip('🎉 冬瓜跳起来啦——砰！坐扁它！');
+  setTimeout(function(){
+    sfx('thud');
+    lawn.classList.remove('shake'); void lawn.offsetWidth; lawn.classList.add('shake'); setTimeout(function(){ lawn.classList.remove('shake'); },450);
+    var ring=document.createElement('div'); ring.className='thud-ring';
+    ring.style.left=(zx-42)+'px'; ring.style.top=(r*laneH+laneH-30)+'px'; ring.style.width='84px'; ring.style.height='26px';
+    fx.appendChild(ring); setTimeout(function(){ if(ring.parentNode) ring.remove(); },550);
+    if(state.zombies.indexOf(z)>=0 && z.hp>0) killZombie(z,'squash');
+  },680);
+  setTimeout(function(){ if(el.parentNode) el.remove(); },1000);
   renderGrid();
 }
 function zombieCol(z){ return colOfX(z.x); }
@@ -868,6 +991,7 @@ function explodeCherry(r,c){
   el.style.width=(cellW*3)+'px'; el.style.height=(laneH*3)+'px'; el.style.fontSize='110px';
   fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },850);
   sfx('boom');
+  lawn.classList.remove('shake'); void lawn.offsetWidth; lawn.classList.add('shake'); setTimeout(function(){ lawn.classList.remove('shake'); },450);
   var targets=state.zombies.filter(function(z){ return Math.abs(z.row-r)<=1 && Math.abs(zombieCol(z)-c)<=1; });
   tip('💥 砰！樱桃炸弹爆炸啦，炸跑了 '+targets.length+' 个僵尸！');
   targets.forEach(function(z){ killZombie(z); });
@@ -881,7 +1005,7 @@ function explodeJalapeno(r,c){
   el.style.width=(lawn.clientWidth-38)+'px'; el.style.height=laneH+'px'; el.style.fontSize='44px';
   el.innerHTML='<span>🔥</span><span>🔥</span><span>🔥</span><span>🔥</span><span>🔥</span>';
   fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },850);
-  sfx('boom');
+  sfx('fire');
   var targets=state.zombies.filter(function(z){ return z.row===r; });
   tip('🔥 火爆辣椒喷火啦，烧跑了这一整排的 '+targets.length+' 个僵尸！');
   targets.forEach(function(z){ killZombie(z); });
@@ -930,7 +1054,7 @@ function gameLoop(){
     if(p.type==='wintermelon'){
       var squashTarget=null;
       state.zombies.forEach(function(z){ if(z.row===r && Math.abs(z.x-colCenter(c))<colStep()*0.8) squashTarget=z; });
-      if(squashTarget) squashWintermelon(r,c,squashTarget);
+      if(squashTarget) startSquash(r,c,squashTarget);
     }
   }
   // peas move
@@ -941,7 +1065,7 @@ function gameLoop(){
       if(!z){ if(pea.el) pea.el.remove(); return false; }
       var zx=38+(z.x/100)*(lawn.clientWidth-38)+16, zy=z.row*(lawn.clientHeight/ROWS)+(lawn.clientHeight/ROWS)/2;
       var dx=zx-pea.x, dy=zy-pea.y, dist=Math.sqrt(dx*dx+dy*dy)||1;
-      if(dist<28){ z.hp-=1; positionZombie(z); if(pea.el) pea.el.remove(); if(z.hp<=0) killZombie(z); return false; }
+      if(dist<28){ z.hp-=1; zFlash(z); peaSplat(pea.x,pea.y,pea.ice); sfx('splat'); positionZombie(z); if(pea.el) pea.el.remove(); if(z.hp<=0) killZombie(z); return false; }
       var step=Math.min(17,dist); pea.x+=dx/dist*step; pea.y+=dy/dist*step;
       if(pea.el){ pea.el.style.left=pea.x+'px'; pea.el.style.top=(pea.y-4)+'px'; pea.el.style.transform='rotate('+(Math.atan2(dy,dx)*180/Math.PI)+'deg)'; }
       return true;
@@ -950,7 +1074,7 @@ function gameLoop(){
     if(pea.el) pea.el.style.left=pea.x+'px';
     var hit=null;
     state.zombies.forEach(function(z){ var zx=38+(z.x/100)*(lawn.clientWidth-38); if(z.row===pea.row && Math.abs(zx-pea.x)<34) hit=z; });
-    if(hit){ hit.hp-=1; if(pea.ice){ hit.slow=45; if(hit.el) hit.el.classList.add('chilled'); } positionZombie(hit); if(pea.el) pea.el.remove(); if(hit.hp<=0) killZombie(hit); return false; }
+    if(hit){ hit.hp-=1; if(pea.ice){ hit.slow=45; if(hit.el) hit.el.classList.add('chilled'); sfx('freeze'); } zFlash(hit); peaSplat(pea.x,pea.row*(lawn.clientHeight/ROWS)+(lawn.clientHeight/ROWS)/2,pea.ice); sfx('splat'); positionZombie(hit); if(pea.el) pea.el.remove(); if(hit.hp<=0) killZombie(hit); return false; }
     if(pea.x>lawn.clientWidth-10){ if(pea.el) pea.el.remove(); return false; }
     return true;
   });
@@ -963,13 +1087,15 @@ function gameLoop(){
     var nearPlant = p && Math.abs(z.x-colCenter(col))<colStep()*0.45;
     if(nearPlant && z.type==='pole' && !z.vaulted){
       // pole zombie jumps clear over the first plant it meets, once only
-      z.vaulted=true; z.x=Math.max(4,z.x-colStep());
+      z.vaulted=true; z.x=Math.max(4,z.x-colStep()); sfx('boing');
       if(z.el){ z.el.classList.remove('vaulting'); void z.el.offsetWidth; z.el.classList.add('vaulting'); }
       tip('🏃 它撑杆一跳，跳过了一棵植物！下一棵它就跳不过去啦。');
     } else if(nearPlant){
+      if(z.el) z.el.classList.add('eating');
       z.eatCool-=(z.slow>0?0.5:1);
-      if(z.eatCool<=0){ p.hp-=1; z.eatCool=10; if(p.hp<=0){ state.grid[idx]=null; tip('哎呀，一棵植物被吃掉啦，再种一棵吧！'); renderGrid(); } else renderGrid(); }
+      if(z.eatCool<=0){ p.hp-=1; z.eatCool=10; sfx('chomp'); if(p.hp<=0){ state.grid[idx]=null; tip('哎呀，一棵植物被吃掉啦，再种一棵吧！'); renderGrid(); } else renderGrid(); }
     } else {
+      if(z.el) z.el.classList.remove('eating');
       z.x-=z.speed*0.28*(z.enraged?1.8:1)*(z.slow>0?0.5:1);
     }
     positionZombie(z);
@@ -984,7 +1110,7 @@ function gameLoop(){
 }
 function shootPea(r,c,ice){
   var pea={row:r,x:38+((c+0.7)/COLS)*(lawn.clientWidth-38),y:null,el:null,ice:!!ice};
-  state.peas.push(pea); createPea(pea);
+  state.peas.push(pea); createPea(pea); plantKick(r,c); sfx('shoot');
 }
 function createPea(pea){
   var el=document.createElement('div'); el.className='pea'+(pea.ice?' ice':'');
@@ -997,16 +1123,24 @@ function shootSpike(r,c){
   // aim at the zombie closest to the house, whichever row it is in
   var best=null; state.zombies.forEach(function(z){ if(!best||z.x<best.x) best=z; });
   spike.target=best;
-  state.peas.push(spike); createSpike(spike);
+  state.peas.push(spike); createSpike(spike); plantKick(r,c); sfx('spike');
 }
 function createSpike(spike){
   var el=document.createElement('div'); el.className='pea spike';
   el.style.left=spike.x+'px'; el.style.top=(spike.y-4)+'px';
   fx.appendChild(el); spike.el=el;
 }
+function zFlash(z){ if(!z.el) return; z.el.classList.add('hitflash'); setTimeout(function(){ if(z.el) z.el.classList.remove('hitflash'); },120); }
+var SPLAT_SVG='<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="20" cy="20" r="7" fill="#2ecc40"/><circle cx="9" cy="11" r="3.4" fill="#2ecc40"/><circle cx="31" cy="13" r="3" fill="#27ae60"/><circle cx="30" cy="29" r="3.6" fill="#2ecc40"/><circle cx="10" cy="28" r="2.8" fill="#27ae60"/><circle cx="20" cy="7" r="2.4" fill="#27ae60"/></svg>';
+function peaSplat(x,y,ice){ var el=document.createElement('div'); el.className='splat'+(ice?' ice':''); el.innerHTML=SPLAT_SVG; el.style.left=(x-14)+'px'; el.style.top=(y-14)+'px'; fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },420); }
+function plantKick(r,c){ var el=cellEl(r,c); if(!el) return; var s=el.querySelector('.plant-emoji'); if(!s) return; s.classList.remove('fired'); void s.offsetWidth; s.classList.add('fired'); setTimeout(function(){ s.classList.remove('fired'); },240); }
 function killZombieEl(z){ if(z.el) z.el.remove(); }
-function killZombie(z){
-  killZombieEl(z); state.zombies=state.zombies.filter(function(x){return x!==z});
+function killZombie(z,mode){
+  // the zombie leaves the game at once, but its body plays the fall —
+  // or, when the squash lands on it, the pancake flattening — first
+  state.zombies=state.zombies.filter(function(x){return x!==z});
+  if(z.el){ var el=z.el; z.el=null; el.classList.remove('eating'); el.classList.add(mode==='squash'?'squashed':'dying'); setTimeout(function(){ if(el.parentNode) el.remove(); },mode==='squash'?800:680); }
+  if(mode!=='squash') sfx('fall');
   state.beaten++; state.totalBeaten++;
   tip('🎉 赶跑一个僵尸！它身上的字是“'+z.char+'”。');
   if(z.char===currentWord().char && Math.random()<0.5){ /* frequent exposure */ }
@@ -1171,6 +1305,7 @@ function clearField(){
 function resetGame(level){ state.level=level||1; state.wordIdx=state.level-1; state.beaten=0; state.sun=150; state.selected='sunflower'; clearField(); state.running=true; state.paused=false; $('pauseBtn').textContent='⏸️'; renderWordBanner(); }
 window.addEventListener('resize',function(){ syncLayout(); state.zombies.forEach(positionZombie); });
 
+$('startZombie').innerHTML=zombieArt('cone');
 buildCells(); syncLayout(); renderWordBanner(); renderGrid();
 setInterval(gameLoop,100);
 </script>
