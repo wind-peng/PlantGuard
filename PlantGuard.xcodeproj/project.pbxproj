@@ -7,89 +7,89 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23C217A5D7914893B73BC188 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5EF13FE140C1B2233940 /* AppDelegate.swift */; };
-		2402EC23EE1E4AC48A9312E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4AD36A455C488A87F6B5F7 /* ViewController.swift */; };
-		411E1705DF484BC29FF2B410 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD981F80B343B982E69ECE /* index.html */; };
-		0DA657FFEEF745C5A9EED9EC /* AppIcon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = E80B743E048F4D548CC5FDE3 /* AppIcon1024x1024.png */; };
-		D77ADE042CC44C37893FF522 /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A834F518C88A4292BDDF8084 /* AppIcon60x60@2x.png */; };
-		897707E2D28F42E38BBC8160 /* AppIcon60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 35F8BD1114414D5E866FE446 /* AppIcon60x60@3x.png */; };
-		603AE62C287D45B5BA9D3FA8 /* AppIcon76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8AFD92A2FDD4AED897FFD41 /* AppIcon76x76@2x.png */; };
-		8DD2AB0029A6493093E7C3C1 /* AppIcon83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A21E1A476443FFA3562104 /* AppIcon83.5x83.5@2x.png */; };
-		D89777A03D254699A42E18CE /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A29E75440E041DD8435E9D5 /* AppIcon40x40@2x.png */; };
-		1EAF0F4F89AA4AC89C99564A /* AppIcon40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4879DA20C8BA48638EBB365A /* AppIcon40x40@3x.png */; };
-		D76185883081468480D1D0F5 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17AAC05A1D204C13962FA6CE /* AppIcon29x29@2x.png */; };
-		12F1A51165E745A58ABA9A97 /* AppIcon29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BD494658A84D248EE14D98 /* AppIcon29x29@3x.png */; };
-		D14A39BB25EB45698D66D0F8 /* AppIcon20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88CAB041DBA046A78D65E7C1 /* AppIcon20x20@2x.png */; };
-		29A25A7A1FFA42748178BC19 /* AppIcon20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EA0602225964EED8B371118 /* AppIcon20x20@3x.png */; };
-		6E5922C5799041528E7F4EEC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965534A71CC74B309B2A9AD1 /* WebKit.framework */; };
+		580513791D9B4938B01E820A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E97515160C4B4BB3116977 /* AppDelegate.swift */; };
+		233395C4D0C8472DB260881C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B295F689A47CF9BAD632D /* ViewController.swift */; };
+		A136B1824E2E432D9CB084B3 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 4216168DDDCD4440A29BF2AB /* index.html */; };
+		B6C91E45D840470DB1C7AC6C /* AppIcon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 8156B149E3DB412784F6220E /* AppIcon1024x1024.png */; };
+		F70BAC85627048EA96B046E8 /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B72AB9571104F76A2F6415C /* AppIcon60x60@2x.png */; };
+		25276E71D94F4132AA038DEE /* AppIcon60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E11166DADC844C669ECD1F44 /* AppIcon60x60@3x.png */; };
+		456BEF2EF04942819ADFAC13 /* AppIcon76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 037C8756F02441F6B39108FC /* AppIcon76x76@2x.png */; };
+		98CC2E13B3D54FA29F364FE5 /* AppIcon83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EE3327AD2A49FE9924CF13 /* AppIcon83.5x83.5@2x.png */; };
+		B24ECDB5F12F4C66BA1932A1 /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 923825C4B75A4B058DD58B63 /* AppIcon40x40@2x.png */; };
+		70850527C6804853A375295C /* AppIcon40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B019D8E3CE4FF082E9E372 /* AppIcon40x40@3x.png */; };
+		EB70502B29A44F01A30D5E93 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D086F93DD8B04F10A4C8908A /* AppIcon29x29@2x.png */; };
+		11F9F7ECAEB54414B6B6CF95 /* AppIcon29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D28E7EC12C846479C6EEFF4 /* AppIcon29x29@3x.png */; };
+		49BA1EEE30964E51A4AA1C30 /* AppIcon20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B28F7A6CA25A47338EBEFC33 /* AppIcon20x20@2x.png */; };
+		4F6867EDBBEA4EA1AD6863FC /* AppIcon20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F5B0C32BF440BB98120D13 /* AppIcon20x20@3x.png */; };
+		B8FBCEF55ABD4BC69E8EF430 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C18B30E85A048E6B429A9BC /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD2E5EF13FE140C1B2233940 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ED4AD36A455C488A87F6B5F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F17817025ADA4B968EC7F6EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2FAD981F80B343B982E69ECE /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		E80B743E048F4D548CC5FDE3 /* AppIcon1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon1024x1024.png; sourceTree = "<group>"; };
-		A834F518C88A4292BDDF8084 /* AppIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon60x60@2x.png; sourceTree = "<group>"; };
-		35F8BD1114414D5E866FE446 /* AppIcon60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon60x60@3x.png; sourceTree = "<group>"; };
-		A8AFD92A2FDD4AED897FFD41 /* AppIcon76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon76x76@2x.png; sourceTree = "<group>"; };
-		31A21E1A476443FFA3562104 /* AppIcon83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon83.5x83.5@2x.png; sourceTree = "<group>"; };
-		3A29E75440E041DD8435E9D5 /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40@2x.png; sourceTree = "<group>"; };
-		4879DA20C8BA48638EBB365A /* AppIcon40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40@3x.png; sourceTree = "<group>"; };
-		17AAC05A1D204C13962FA6CE /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29@2x.png; sourceTree = "<group>"; };
-		01BD494658A84D248EE14D98 /* AppIcon29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29@3x.png; sourceTree = "<group>"; };
-		88CAB041DBA046A78D65E7C1 /* AppIcon20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon20x20@2x.png; sourceTree = "<group>"; };
-		8EA0602225964EED8B371118 /* AppIcon20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon20x20@3x.png; sourceTree = "<group>"; };
-		80A9952B2F0A467B9827893B /* PlantGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		965534A71CC74B309B2A9AD1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A4E97515160C4B4BB3116977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate.swift"; sourceTree = "<group>"; };
+		C56B295F689A47CF9BAD632D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController.swift"; sourceTree = "<group>"; };
+		1443BF065D36437B8E2EFBF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		4216168DDDCD4440A29BF2AB /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "index.html"; sourceTree = "<group>"; };
+		8156B149E3DB412784F6220E /* AppIcon1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon1024x1024.png"; sourceTree = "<group>"; };
+		3B72AB9571104F76A2F6415C /* AppIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@2x.png"; sourceTree = "<group>"; };
+		E11166DADC844C669ECD1F44 /* AppIcon60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@3x.png"; sourceTree = "<group>"; };
+		037C8756F02441F6B39108FC /* AppIcon76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon76x76@2x.png"; sourceTree = "<group>"; };
+		F7EE3327AD2A49FE9924CF13 /* AppIcon83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon83.5x83.5@2x.png"; sourceTree = "<group>"; };
+		923825C4B75A4B058DD58B63 /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x.png"; sourceTree = "<group>"; };
+		26B019D8E3CE4FF082E9E372 /* AppIcon40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@3x.png"; sourceTree = "<group>"; };
+		D086F93DD8B04F10A4C8908A /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
+		4D28E7EC12C846479C6EEFF4 /* AppIcon29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@3x.png"; sourceTree = "<group>"; };
+		B28F7A6CA25A47338EBEFC33 /* AppIcon20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon20x20@2x.png"; sourceTree = "<group>"; };
+		99F5B0C32BF440BB98120D13 /* AppIcon20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon20x20@3x.png"; sourceTree = "<group>"; };
+		7341CCA03396456E8C88E8E2 /* PlantGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlantGuard.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C18B30E85A048E6B429A9BC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = "System/Library/Frameworks/WebKit.framework"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		742EC7EB0894484693007AA8 /* Frameworks */ = {
+		507C06C156754CD29776E74B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E5922C5799041528E7F4EEC /* WebKit.framework in Frameworks */,
+				B8FBCEF55ABD4BC69E8EF430 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4BF9334480794C9280BFA97A /* PlantGuard */ = {
+		9AA8E6C7C55C4DB3A0E36439 /* PlantGuard */ = {
 			isa = PBXGroup;
 			children = (
-				45802D62E7904880B47B8103 /* PlantGuard */,
-				3DCEEBB6508F421292B51290 /* Products */,
+				05891D314EB84AA6A0BEA738 /* PlantGuard */,
+				31F1F5C998A74F16AC9C6924 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		45802D62E7904880B47B8103 /* PlantGuard */ = {
+		05891D314EB84AA6A0BEA738 /* PlantGuard */ = {
 			isa = PBXGroup;
 			children = (
-				FD2E5EF13FE140C1B2233940 /* AppDelegate.swift */,
-				ED4AD36A455C488A87F6B5F7 /* ViewController.swift */,
-				F17817025ADA4B968EC7F6EC /* Info.plist */,
-				2FAD981F80B343B982E69ECE /* index.html */,
-				E80B743E048F4D548CC5FDE3 /* AppIcon1024x1024.png */,
-				A834F518C88A4292BDDF8084 /* AppIcon60x60@2x.png */,
-				35F8BD1114414D5E866FE446 /* AppIcon60x60@3x.png */,
-				A8AFD92A2FDD4AED897FFD41 /* AppIcon76x76@2x.png */,
-				31A21E1A476443FFA3562104 /* AppIcon83.5x83.5@2x.png */,
-				3A29E75440E041DD8435E9D5 /* AppIcon40x40@2x.png */,
-				4879DA20C8BA48638EBB365A /* AppIcon40x40@3x.png */,
-				17AAC05A1D204C13962FA6CE /* AppIcon29x29@2x.png */,
-				01BD494658A84D248EE14D98 /* AppIcon29x29@3x.png */,
-				88CAB041DBA046A78D65E7C1 /* AppIcon20x20@2x.png */,
-				8EA0602225964EED8B371118 /* AppIcon20x20@3x.png */,
+				A4E97515160C4B4BB3116977 /* AppDelegate.swift */,
+				C56B295F689A47CF9BAD632D /* ViewController.swift */,
+				1443BF065D36437B8E2EFBF8 /* Info.plist */,
+				4216168DDDCD4440A29BF2AB /* index.html */,
+				8156B149E3DB412784F6220E /* AppIcon1024x1024.png */,
+				3B72AB9571104F76A2F6415C /* AppIcon60x60@2x.png */,
+				E11166DADC844C669ECD1F44 /* AppIcon60x60@3x.png */,
+				037C8756F02441F6B39108FC /* AppIcon76x76@2x.png */,
+				F7EE3327AD2A49FE9924CF13 /* AppIcon83.5x83.5@2x.png */,
+				923825C4B75A4B058DD58B63 /* AppIcon40x40@2x.png */,
+				26B019D8E3CE4FF082E9E372 /* AppIcon40x40@3x.png */,
+				D086F93DD8B04F10A4C8908A /* AppIcon29x29@2x.png */,
+				4D28E7EC12C846479C6EEFF4 /* AppIcon29x29@3x.png */,
+				B28F7A6CA25A47338EBEFC33 /* AppIcon20x20@2x.png */,
+				99F5B0C32BF440BB98120D13 /* AppIcon20x20@3x.png */,
 			);
 			path = PlantGuard;
 			sourceTree = "<group>";
 		};
-		3DCEEBB6508F421292B51290 /* Products */ = {
+		31F1F5C998A74F16AC9C6924 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				80A9952B2F0A467B9827893B /* PlantGuard.app */,
+				7341CCA03396456E8C88E8E2 /* PlantGuard.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,13 +97,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		168DA7B048AD459BAA77BD6B /* PlantGuard */ = {
+		2AC3EC22A3F64977A1CAB470 /* PlantGuard */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F625BABB9BC94E479EEC5D51 /* Build configuration list for PBXNativeTarget "PlantGuard" */;
+			buildConfigurationList = 08008DE1B1054187BC5A03EB /* Build configuration list for PBXNativeTarget "PlantGuard" */;
 			buildPhases = (
-				2A08FD749AF14CBF96A86796 /* Sources */,
-				742EC7EB0894484693007AA8 /* Frameworks */,
-				B2E1F9D5B8F54C77A402F9C8 /* Resources */,
+				97AFA878E8F7468199F72EB4 /* Sources */,
+				507C06C156754CD29776E74B /* Frameworks */,
+				854744E07FC04F94B52FEA40 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -111,25 +111,25 @@
 			);
 			name = PlantGuard;
 			productName = PlantGuard;
-			productReference = 80A9952B2F0A467B9827893B /* PlantGuard.app */;
+			productReference = 7341CCA03396456E8C88E8E2 /* PlantGuard.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5B11C844194C4B5CBDD4DCF2 /* Project object */ = {
+		E6CB3B1C5A934CE8A07BD428 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					168DA7B048AD459BAA77BD6B = {
+					2AC3EC22A3F64977A1CAB470 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = 8E6A4F6DDC0F43EAB75A3E5C /* Build configuration list for PBXProject "PlantGuard" */;
+			buildConfigurationList = 840B246968C1446BB44CCB94 /* Build configuration list for PBXProject "PlantGuard" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -137,52 +137,52 @@
 				en,
 				Base,
 			);
-			mainGroup = 4BF9334480794C9280BFA97A /* PlantGuard */;
-			productRefGroup = 3DCEEBB6508F421292B51290 /* Products */;
+			mainGroup = 9AA8E6C7C55C4DB3A0E36439 /* PlantGuard */;
+			productRefGroup = 31F1F5C998A74F16AC9C6924 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				168DA7B048AD459BAA77BD6B /* PlantGuard */,
+				2AC3EC22A3F64977A1CAB470 /* PlantGuard */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B2E1F9D5B8F54C77A402F9C8 /* Resources */ = {
+		854744E07FC04F94B52FEA40 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				411E1705DF484BC29FF2B410 /* index.html in Resources */,
-				0DA657FFEEF745C5A9EED9EC /* AppIcon1024x1024.png in Resources */,
-				D77ADE042CC44C37893FF522 /* AppIcon60x60@2x.png in Resources */,
-				897707E2D28F42E38BBC8160 /* AppIcon60x60@3x.png in Resources */,
-				603AE62C287D45B5BA9D3FA8 /* AppIcon76x76@2x.png in Resources */,
-				8DD2AB0029A6493093E7C3C1 /* AppIcon83.5x83.5@2x.png in Resources */,
-				D89777A03D254699A42E18CE /* AppIcon40x40@2x.png in Resources */,
-				1EAF0F4F89AA4AC89C99564A /* AppIcon40x40@3x.png in Resources */,
-				D76185883081468480D1D0F5 /* AppIcon29x29@2x.png in Resources */,
-				12F1A51165E745A58ABA9A97 /* AppIcon29x29@3x.png in Resources */,
-				D14A39BB25EB45698D66D0F8 /* AppIcon20x20@2x.png in Resources */,
-				29A25A7A1FFA42748178BC19 /* AppIcon20x20@3x.png in Resources */,
+				A136B1824E2E432D9CB084B3 /* index.html in Resources */,
+				B6C91E45D840470DB1C7AC6C /* AppIcon1024x1024.png in Resources */,
+				F70BAC85627048EA96B046E8 /* AppIcon60x60@2x.png in Resources */,
+				25276E71D94F4132AA038DEE /* AppIcon60x60@3x.png in Resources */,
+				456BEF2EF04942819ADFAC13 /* AppIcon76x76@2x.png in Resources */,
+				98CC2E13B3D54FA29F364FE5 /* AppIcon83.5x83.5@2x.png in Resources */,
+				B24ECDB5F12F4C66BA1932A1 /* AppIcon40x40@2x.png in Resources */,
+				70850527C6804853A375295C /* AppIcon40x40@3x.png in Resources */,
+				EB70502B29A44F01A30D5E93 /* AppIcon29x29@2x.png in Resources */,
+				11F9F7ECAEB54414B6B6CF95 /* AppIcon29x29@3x.png in Resources */,
+				49BA1EEE30964E51A4AA1C30 /* AppIcon20x20@2x.png in Resources */,
+				4F6867EDBBEA4EA1AD6863FC /* AppIcon20x20@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2A08FD749AF14CBF96A86796 /* Sources */ = {
+		97AFA878E8F7468199F72EB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23C217A5D7914893B73BC188 /* AppDelegate.swift in Sources */,
-				2402EC23EE1E4AC48A9312E0 /* ViewController.swift in Sources */,
+				580513791D9B4938B01E820A /* AppDelegate.swift in Sources */,
+				233395C4D0C8472DB260881C /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1657FB6BB64B4A39ACFC6ECE /* Debug */ = {
+		47A3189378BA4A88B96F3B5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,7 +244,7 @@
 			};
 			name = Debug;
 		};
-		557B85C5CB294BBCA7A56041 /* Release */ = {
+		3B3E721B287C48FFA8A9DB07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -300,7 +300,7 @@
 			};
 			name = Release;
 		};
-		E30AE191DD204EE1AE8E46A7 /* Debug */ = {
+		751DC6A2A43E491F8814E283 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -320,7 +320,7 @@
 			};
 			name = Debug;
 		};
-		89E98B7790A845A69933A429 /* Release */ = {
+		D44BFA4E06D44249AF93DFFC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -343,25 +343,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E6A4F6DDC0F43EAB75A3E5C /* Build configuration list for PBXProject "PlantGuard" */ = {
+		840B246968C1446BB44CCB94 /* Build configuration list for PBXProject "PlantGuard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1657FB6BB64B4A39ACFC6ECE /* Debug */,
-				557B85C5CB294BBCA7A56041 /* Release */,
+				47A3189378BA4A88B96F3B5E /* Debug */,
+				3B3E721B287C48FFA8A9DB07 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F625BABB9BC94E479EEC5D51 /* Build configuration list for PBXNativeTarget "PlantGuard" */ = {
+		08008DE1B1054187BC5A03EB /* Build configuration list for PBXNativeTarget "PlantGuard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E30AE191DD204EE1AE8E46A7 /* Debug */,
-				89E98B7790A845A69933A429 /* Release */,
+				751DC6A2A43E491F8814E283 /* Debug */,
+				D44BFA4E06D44249AF93DFFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5B11C844194C4B5CBDD4DCF2 /* Project object */;
+	rootObject = E6CB3B1C5A934CE8A07BD428 /* Project object */;
 }
