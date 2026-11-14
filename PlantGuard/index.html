@@ -3120,7 +3120,7 @@ var PLANTS = {
 };
 var ROWS = 3,
   COLS = 5,
-  GOAL = 8,
+  GOAL = 5,
   PORT_COLS = 5,
   LAND_COLS = 8;
 var state = {
@@ -4619,7 +4619,7 @@ function createZombie(typeKey, row, x, w) {
     slow: 0,
     hp: maxHp,
     maxHp: maxHp,
-    speed: (0.55 + state.level * 0.05 + Math.random() * 0.2) * def.speedMul,
+    speed: (0.55 + state.level * 0.05 + Math.random() * 0.2) * def.speedMul * 0.6,
     eatCool: 0,
     char: w.char,
     el: null,
@@ -5068,7 +5068,7 @@ function gameLoop() {
   state.spawnTimer--;
   if (state.spawnTimer <= 0) {
     spawnZombie();
-    state.spawnTimer = Math.max(55, 95 - state.level * 6);
+    state.spawnTimer = Math.max(90, 150 - state.level * 6);
   }
   state.sunTimer--;
   if (state.sunTimer <= 0) {
@@ -5084,7 +5084,7 @@ function gameLoop() {
   state.quizTimer--;
   if (state.quizTimer <= 0) {
     openQuiz(true);
-    state.quizTimer = 340;
+    state.quizTimer = 1200;
     return;
   }
   for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
@@ -5711,7 +5711,7 @@ function gameLoop() {
     }
     if (!acted) {
       if (z.el) z.el.classList.remove('eating');
-      z.x -= z.speed * 0.28 * (z.enraged ? 1.8 : 1) * (z.slow > 0 ? 0.5 : 1);
+      z.x -= z.speed * 0.28 * (z.enraged ? 1.3 : 1) * (z.slow > 0 ? 0.5 : 1);
     }
     positionZombie(z);
     if (z.x <= 3) {
@@ -6321,9 +6321,9 @@ function clearField() {
   fx.querySelectorAll('.sun-token').forEach(function (e) {
     e.remove();
   });
-  state.spawnTimer = 40;
+  state.spawnTimer = 100;
   state.sunTimer = 20;
-  state.quizTimer = 340;
+  state.quizTimer = 1200;
   state.ladders = {};
   state.pads = {};
   state.pots = {};
