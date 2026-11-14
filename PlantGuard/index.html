@@ -64,7 +64,7 @@
   .cell .plant-emoji svg{width:54px;height:54px;display:block}
   .plant-card .pe svg{width:54px;height:54px}
   @keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-2px)}}
-  .zombie{position:absolute;width:66px;margin-left:-8px;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .12s linear}
+  .zombie{position:absolute;width:66px;margin-left:-8px;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .12s linear,opacity .35s ease}
   .zombie .z-emoji{position:relative;line-height:0;animation:zbob .58s ease-in-out infinite alternate}
   .zombie .z-online{width:50px;height:69px;display:block;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35));}
   .zombie .z-svg{width:44px;height:61px;display:block;overflow:visible;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3));transition:filter .12s,transform .3s}
@@ -228,32 +228,32 @@
     .wrap{max-width:1120px;padding:8px 10px 18px}
     .hud .icon-btn{width:40px;height:40px;min-height:40px;font-size:19px}
     .hud .rotate-btn{height:40px;min-height:40px}
-    .title-row{margin:4px 2px}
-    .title-row h1{font-size:20px}
+    .title-row{margin:3px 2px}
+    .title-row h1{font-size:18px}
     .subtitle{display:none}
     .level-badge{padding:5px 10px;font-size:14px}
-    .word-banner{padding:6px 10px;grid-template-columns:54px minmax(0,1fr) auto;gap:10px;border-radius:16px}
-    .big-char{width:54px;height:54px;font-size:36px;border-radius:12px}
+    .word-banner{padding:6px 10px;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;border-radius:16px}
+    .big-char{width:44px;height:44px;font-size:30px;border-radius:12px}
     .big-char i{font-size:17px}
     .wb-mid b{font-size:16px;line-height:1.3}
     .wb-mid p{display:none}
     .wb-mid .progress{height:8px;margin-top:5px}
     .wb-actions{flex-direction:row;gap:6px}
     .speak-btn,.challenge-btn{padding:8px 11px;font-size:14px;min-height:40px}
-    .stats-row{margin-top:7px;gap:6px}
-    .stats-row .pill{padding:4px 10px;font-size:15px;border-width:2px}
+    .stats-row{margin-top:5px;gap:6px}
+    .stats-row .pill{padding:3px 9px;font-size:14px;border-width:2px}
     .lawn-wrap{margin-top:6px}
-    .lawn{height:clamp(196px,calc(100dvh - 238px),330px);border-radius:16px;border-width:4px}
-    .cell .plant-emoji svg{width:42px;height:42px}
-    .zombie .z-svg{width:33px;height:46px}
-    .zombie .z-char{font-size:17px;padding:1px 7px;border-width:2px}
+    .lawn{height:clamp(124px,calc(100dvh - 268px),330px);border-radius:16px;border-width:4px}
+    .cell .plant-emoji svg{width:32px;height:32px}
+    .zombie .z-svg{width:24px;height:34px}
+    .zombie .z-char{font-size:17px;padding:1px 6px;border-width:2px;margin-top:-10px}
     .sun-token{width:56px;height:56px}
-    .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:6px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
-    .plant-card{padding:5px 2px 4px;border-width:3px;border-radius:14px}
+    .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:4px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
+    .plant-card{padding:3px 1px 2px;border-width:3px;border-radius:14px}
     .plant-card .pe{font-size:30px}
-    .plant-card .pe svg{width:36px;height:36px}
-    .plant-card b{font-size:12px}
-    .plant-card .cost{font-size:11px}
+    .plant-card .pe svg{width:25px;height:25px}
+    .plant-card b{font-size:11px}
+    .plant-card .cost{font-size:10px}
     .tip-bar{margin-top:8px;padding:7px 11px;font-size:13px;min-height:38px}
     .dialog{max-width:640px}
   }
@@ -289,32 +289,32 @@
   body.land .wrap{max-width:1120px;padding:8px 10px 18px}
   body.land .hud .icon-btn{width:40px;height:40px;min-height:40px;font-size:19px}
   body.land .hud .rotate-btn{height:40px;min-height:40px}
-  body.land .title-row{margin:4px 2px}
-  body.land .title-row h1{font-size:20px}
+  body.land .title-row{margin:3px 2px}
+  body.land .title-row h1{font-size:18px}
   body.land .subtitle{display:none}
   body.land .level-badge{padding:5px 10px;font-size:14px}
-  body.land .word-banner{padding:6px 10px;grid-template-columns:54px minmax(0,1fr) auto;gap:10px;border-radius:16px}
-  body.land .big-char{width:54px;height:54px;font-size:36px;border-radius:12px}
+  body.land .word-banner{padding:6px 10px;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;border-radius:16px}
+  body.land .big-char{width:44px;height:44px;font-size:30px;border-radius:12px}
   body.land .big-char i{font-size:17px}
   body.land .wb-mid b{font-size:16px;line-height:1.3}
   body.land .wb-mid p{display:none}
   body.land .wb-mid .progress{height:8px;margin-top:5px}
   body.land .wb-actions{flex-direction:row;gap:6px}
   body.land .speak-btn,body.land .challenge-btn{padding:8px 11px;font-size:14px;min-height:40px}
-  body.land .stats-row{margin-top:7px;gap:6px}
-  body.land .stats-row .pill{padding:4px 10px;font-size:15px;border-width:2px}
+  body.land .stats-row{margin-top:5px;gap:6px}
+  body.land .stats-row .pill{padding:3px 9px;font-size:14px;border-width:2px}
   body.land .lawn-wrap{margin-top:6px}
-  body.land .lawn{height:clamp(196px,calc(100dvh - 238px),330px);border-radius:16px;border-width:4px}
-  body.land .cell .plant-emoji svg{width:42px;height:42px}
-  body.land .zombie .z-svg{width:33px;height:46px}
-  body.land .zombie .z-char{font-size:17px;padding:1px 7px;border-width:2px}
+  body.land .lawn{height:clamp(124px,calc(100dvh - 268px),330px);border-radius:16px;border-width:4px}
+  body.land .cell .plant-emoji svg{width:32px;height:32px}
+  body.land .zombie .z-svg{width:24px;height:34px}
+  body.land .zombie .z-char{font-size:17px;padding:1px 6px;border-width:2px;margin-top:-10px}
   body.land .sun-token{width:56px;height:56px}
-  body.land .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:6px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
-  body.land .plant-card{padding:5px 2px 4px;border-width:3px;border-radius:14px}
+  body.land .shop{grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;margin-top:8px;position:sticky;bottom:6px;z-index:30;background:rgba(255,247,214,.94);padding:4px;border-radius:18px;box-shadow:0 6px 18px rgba(60,100,20,.25)}
+  body.land .plant-card{padding:3px 1px 2px;border-width:3px;border-radius:14px}
   body.land .plant-card .pe{font-size:30px}
-  body.land .plant-card .pe svg{width:36px;height:36px}
-  body.land .plant-card b{font-size:12px}
-  body.land .plant-card .cost{font-size:11px}
+  body.land .plant-card .pe svg{width:25px;height:25px}
+  body.land .plant-card b{font-size:11px}
+  body.land .plant-card .cost{font-size:10px}
   body.land .tip-bar{margin-top:8px;padding:7px 11px;font-size:13px;min-height:38px}
   body.land .dialog{max-width:640px}
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
@@ -324,7 +324,7 @@
   .lawn.mode-fog #fogLayer{opacity:.62}
   .lawn.mode-night .lane{filter:brightness(.42) saturate(.75) hue-rotate(18deg)}
   .lawn.mode-night .house{filter:brightness(.6)}
-  .lawn.mode-pool .lane.water{background:linear-gradient(180deg,#3f9fd8,#2b7fc0 55%,#256ca8);box-shadow:inset 0 3px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(10,50,90,.35)}
+  .lawn.mode-pool .lane.water,.lawn.mode-fog .lane.water{background:linear-gradient(180deg,#3f9fd8,#2b7fc0 55%,#256ca8);box-shadow:inset 0 3px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(10,50,90,.35)}
   .lawn.mode-roof .lane{background:repeating-linear-gradient(102deg,#cf7a45 0 34px,#bd6836 34px 68px);box-shadow:inset 0 -8px 14px rgba(90,40,10,.28)}
   .lawn.mode-roof .lane:nth-child(2){filter:brightness(1.05)}
   /* ===== plant cell layers ===== */
@@ -523,7 +523,7 @@
       <div><span>☀️</span>点小太阳<br>收集阳光</div>
       <div><span>🎯</span>玩认字挑战<br>赢更多阳光</div>
     </div>
-    <p style="font-size:13px">原版僵尸全家福都会来哦：普通、旗帜、路障、撑杆、铁桶、读报、小鬼、铁门、橄榄球、舞王和它的伴舞、鸭子救生圈、潜水、雪橇车、雪橇小队、海豚骑士、小丑、气球、矿工、跳跳、雪人、蹦极、梯子、投篮车，还有大块头巨人僵尸和最后的大Boss僵尸博士！关卡越高，种类越多。一共五种地方轮着来：白天、夜晚、泳池、浓雾、屋顶，每一关开始前可以自己选带哪些植物（最多九个）！</p>
+    <p style="font-size:13px">原版僵尸全家福都会来哦：普通、旗帜、路障、撑杆、铁桶、读报、小鬼、铁门、橄榄球、舞王和它的伴舞、鸭子救生圈、潜水、雪橇车、雪橇小队、海豚骑士、小丑、气球、矿工、跳跳、雪人、蹦极、梯子、投篮车，还有大块头巨人僵尸和最后的大Boss僵尸博士！关卡越高，种类越多。一共五种地方轮着来：一关白天、一关夜晚，再到泳池、浓雾、屋顶，轮完再从白天开始。每一关开始前可以自己选带哪些植物（最多九个）！</p>
     <p style="font-size:13px">📱 把手机横过来玩更好玩：草坪一共五排，<br>最下面一排就是选植物的地方。</p>
     <p id="resumeNote" style="display:none;font-size:14px;font-weight:800;color:#3e7d1e;margin:4px 0 10px"></p>
     <button class="big-btn" id="startBtn">横屏开始玩啦 ▶</button>
@@ -3217,7 +3217,7 @@ var ROWS = 5,
   PORT_COLS = 5,
   LAND_COLS = 8;
 var state = {
-  sun: 150,
+  sun: 50,
   selected: 'sunflower',
   running: false,
   paused: false,
@@ -4020,7 +4020,7 @@ function renderGrid() {
     if (state.pads[idx]) html += '<span class="pad-art">' + PLANTS.lilypad.emoji + '</span>';
     if (state.pots[idx]) html += '<span class="pot-art">' + PLANTS.flowerpot.emoji + '</span>';
     if (p) {
-      var frac = p.hp / PLANTS[p.type].hp;
+      var frac = p.hp / (p.maxHp || PLANTS[p.type].hp);
       var hurt = p.type === 'walnut' || p.type === 'tallnut' ? frac <= 0.34 ? ' hurt2' : frac <= 0.67 ? ' hurt1' : '' : '';
       var extra = (p.imitater ? ' imit' : '') + (p.type === 'potato' && !p.armed ? ' unarmed' : '') + (p.type === 'chomper' && p.chew > 0 ? ' chewing' : '');
       html += '<span class="plant-emoji' + hurt + extra + '">' + PLANTS[p.type].emoji + '</span><span class="hp"><i style="width:' + Math.max(0, frac * 100) + '%"></i></span>';
@@ -4111,7 +4111,7 @@ function levelMode(lv) {
   return MODES[(lv - 1) % 5];
 }
 function isWaterCell(r) {
-  return state.mode === 'pool' && r === 2;
+  return (state.mode === 'pool' || state.mode === 'fog') && r === 2;
 }
 function mushAwake() {
   return state.mode === 'night' || state.mode === 'fog';
@@ -4418,7 +4418,7 @@ function plantAt(r, c) {
     }
     state.sun -= def.cost;
     state.shells[idx] = {
-      hp: 16
+      hp: hpScale(16)
     };
     sfx('pop');
     tip('🎃 南瓜头套好啦，僵尸要先咬坏它！');
@@ -4436,7 +4436,8 @@ function plantAt(r, c) {
     }
     state.sun -= def.cost;
     existing.type = sel;
-    existing.hp = Math.max(existing.hp, def.hp);
+    existing.hp = Math.max(existing.hp, plantMaxHp(def));
+    existing.maxHp = existing.hp;
     existing.cool = 0;
     existing.chew = 0;
     existing.armed = sel === 'spikerock';
@@ -4476,9 +4477,9 @@ function plantAt(r, c) {
     }
     state.sun -= def.cost;
     if (def.platform === 'pad') state.pads[idx] = {
-      hp: 6
+      hp: hpScale(6)
     };else state.pots[idx] = {
-      hp: 6
+      hp: hpScale(6)
     };
     sfx('pop');
     tip(def.name + '放好啦，可以在上面种植物！');
@@ -4520,11 +4521,12 @@ function plantAt(r, c) {
   state.sun -= plantCost;
   var np = {
     type: plantType,
-    hp: def.hp,
+    hp: plantMaxHp(def),
+    maxHp: plantMaxHp(def),
     cool: 0,
     burst: 0,
     burstCool: 0,
-    sunCool: plantType === 'sunshroom' ? 70 + Math.random() * 30 : 45 + Math.random() * 30,
+    sunCool: plantType === 'sunshroom' ? 70 + Math.random() * 30 : plantType === 'sunflower' ? Math.round((60 + Math.random() * 20) * COLS / 9) : 60 + Math.random() * 20,
     fuse: def.instant ? 8 : 0,
     imitater: sel === 'imitater'
   };
@@ -4752,10 +4754,18 @@ var ZTYPES = {
   }
 };
 function levelTotal(lv) {
-  return Math.min(30, 15 + (lv - 1));
+  return Math.min(30, 15 + Math.round((lv - 1) * 15 / 44));
+}
+function hpScale(hp) {
+  return hp <= 0 ? 0 : Math.max(1, Math.round(hp * COLS / 9));
+}
+function plantMaxHp(def) {
+  return def.hp >= 900 ? def.hp : hpScale(def.hp);
 }
 function spawnInterval(lv) {
-  return Math.max(26, Math.round(66 - (lv - 1) * 0.45));
+  var base;
+  if (lv <= 45) base = 66 - (lv - 1) * 0.45;else if (lv <= 65) base = 46.2 - (lv - 45) * 0.5;else base = 36.2 - (lv - 65) * 0.35;
+  return Math.max(8, Math.round(Math.max(24, base) * COLS / 9));
 }
 function checkLevelClear() {
   if (state.cleared || state.failed || !state.running) return;
@@ -4764,30 +4774,51 @@ function checkLevelClear() {
 function pickZombieType() {
   var L = state.level,
     pool = ['normal', 'normal', 'normal', 'normal', 'imp', 'imp', 'cone', 'cone', 'flag'];
-  if (L >= 2) pool.push('newspaper', 'newspaper', 'pole', 'pole', 'ducky', 'ducky');
-  if (L >= 3) pool.push('bucket', 'bucket', 'screendoor', 'screendoor', 'snorkel');
-  if (L >= 4) pool.push('football', 'ladder', 'giant');
-  if (L >= 5) pool.push('dancing', 'pogo', 'dolphin');
-  if (L >= 6) pool.push('jackbox', 'balloon', 'digger');
-  if (L >= 7) pool.push('bobsled');
-  if (L >= 8) pool.push('catapult', 'zomboni');
-  if (L >= 12) pool.push('boss');
-  if (L >= 10) pool.push('yeti', 'giant');
-  if (L >= 20) pool.push('bucket', 'football', 'screendoor');
-  if (L >= 35) pool.push('giant', 'catapult', 'jackbox');
-  if (L >= 50) pool.push('football', 'giant', 'bobsled');
+  if (L >= 3) pool.push('newspaper', 'newspaper', 'pole', 'pole');
+  if (L >= 5) pool.push('ducky', 'ducky');
+  if (L >= 7) pool.push('screendoor', 'screendoor');
+  if (L >= 9) pool.push('snorkel');
+  if (L >= 11) pool.push('bucket', 'bucket');
+  if (L >= 14) pool.push('ladder');
+  if (L >= 17) pool.push('football');
+  if (L >= 20) pool.push('dancing');
+  if (L >= 23) pool.push('pogo');
+  if (L >= 26) pool.push('dolphin');
+  if (L >= 29) pool.push('balloon');
+  if (L >= 32) pool.push('digger');
+  if (L >= 35) pool.push('jackbox');
+  if (L >= 38) pool.push('bobsled');
+  if (L >= 41) pool.push('catapult');
+  if (L >= 44) pool.push('zomboni');
+  if (L >= 48) pool.push('giant');
+  if (L >= 55) pool.push('yeti');
+  if (L >= 66) pool.push('boss');
+  if (L >= 74) pool.push('boss');
+  if (L >= 82) pool.push('boss');
+  var tough = [];
+  if (L >= 7) tough.push('screendoor');
+  if (L >= 11) tough.push('bucket');
+  if (L >= 17) tough.push('football');
+  if (L >= 41) tough.push('catapult');
+  if (L >= 44) tough.push('zomboni');
+  if (L >= 48) tough.push('giant');
+  if (L >= 55) tough.push('yeti');
+  var extra = 0;
+  if (L >= 46 && L <= 65) extra = Math.round((L - 45) / 20 * 6);else if (L >= 66) extra = 6 + Math.round((L - 65) / 23 * 6);
+  for (var ti = 0; ti < extra && tough.length; ti++) pool.push(tough[ti % tough.length]);
   return pool[Math.floor(Math.random() * pool.length)];
 }
 function createZombie(typeKey, row, x, w) {
   var def = ZTYPES[typeKey];
   var baseHp = 6 + Math.min(10, Math.floor(state.level / 4));
-  var maxHp = Math.max(3, Math.round(baseHp * def.hpMul)) + def.armor;
+  var armorHp = hpScale(def.armor);
+  var maxHp = hpScale(Math.max(3, Math.round(baseHp * def.hpMul))) + armorHp;
   var z = {
     id: ++state.zid,
     row: row,
     x: x,
     type: typeKey,
-    armor: def.armor,
+    armor: armorHp,
     speedMul: def.speedMul,
     enraged: false,
     vaulted: false,
@@ -4799,7 +4830,7 @@ function createZombie(typeKey, row, x, w) {
     slow: 0,
     hp: maxHp,
     maxHp: maxHp,
-    speed: (0.55 + Math.min(45, state.level) * 0.045 + Math.random() * 0.2) * def.speedMul * 0.6,
+    speed: (0.5 + Math.min(45, state.level) * 0.04 + Math.random() * 0.2) * def.speedMul * 0.6 * COLS / 9,
     eatCool: 0,
     char: w.char,
     el: null,
@@ -4819,18 +4850,29 @@ function createZombie(typeKey, row, x, w) {
   return z;
 }
 function spawnZombie() {
-  if (state.level >= 6 && Math.random() < 0.07 && spawnBungee()) return;
+  if (state.level >= 62 && Math.random() < 0.07 && spawnBungee()) return;
   var row = Math.floor(Math.random() * ROWS);
   var type = pickZombieType();
   if (type === 'boss' && state.zombies.some(function (o) {
       return o.type === 'boss';
     })) type = 'normal';
-  if (state.mode === 'pool') {
+  if (state.mode === 'pool' || state.mode === 'fog') {
     if (type === 'ducky' || type === 'snorkel' || type === 'dolphin') row = 2;else if (row === 2) row = Math.random() < 0.5 ? 1 : 3;
   }
   var w = WORDS[Math.floor(Math.random() * WORDS.length)];
   if (Math.random() < 0.4) w = currentWord();
   var z = createZombie(type, row, 96, w);
+  if (z.type === 'flag' && state.level >= 66 && Math.random() < 0.6) {
+    var fr1 = Math.floor(Math.random() * ROWS),
+      fr2 = Math.floor(Math.random() * ROWS);
+    if (state.mode === 'pool' || state.mode === 'fog') {
+      if (fr1 === 2) fr1 = 1;
+      if (fr2 === 2) fr2 = 3;
+    }
+    createZombie('normal', fr1, 99, w);
+    createZombie('cone', fr2, 102, w);
+    tip('🚩 旗帜僵尸带着一队僵尸冲过来啦！');
+  }
   if (z.type === 'jackbox') tip('🎁 小丑僵尸来啦！它的盒子过一会儿会砰地爆炸，别在它旁边种花花草草！');
   if (z.type === 'giant') tip('🧌 巨人僵尸来啦！它个子大、力气大，会一棒子砸扁植物，大家一起打它！');
   if (z.type === 'bobsled') tip('🛷 雪橇小队来啦！四个僵尸坐着雪橇冲过来，雪橇停下他们会一起下车！');
@@ -5021,9 +5063,34 @@ function positionZombie(z) {
   }
   var laneH = lawn.clientHeight / ROWS;
   __tunnel.setStyle(z.el, "left", 'calc(38px + ' + z.x / 100 * (lawn.clientWidth - 38) + 'px)');
-  __tunnel.setStyle(z.el, "top", z.row * laneH + 8 + 'px');
+  var topPx = z.row * laneH + 8;
+  if (laneH < 64) {
+    if (z.elH == null) z.elH = z.el.offsetHeight || 0;
+    if (z.elH > 0) topPx = Math.max(0, Math.min((z.row + 1) * laneH - z.elH - 1, lawn.clientHeight - z.elH - 4));
+  }
+  __tunnel.setStyle(z.el, "top", topPx + 'px');
   var bar = z.el.querySelector('.z-hp i');
   if (bar) __tunnel.setStyle(bar, "width", Math.max(0, z.hp / z.maxHp * 100) + '%');
+  if (state.mode === 'fog' && state.fogClear <= 0) {
+    var zcolF = Math.floor(z.x / (100 / COLS));
+    var litF = z.x < 58;
+    if (!litF) {
+      for (var giF = 0; giF < state.grid.length; giF++) {
+        var gpF = state.grid[giF];
+        if (gpF && gpF.type === 'plantern') {
+          var prF = Math.floor(giF / COLS),
+            pcF = giF % COLS;
+          if (Math.abs(prF - z.row) <= 1 && zcolF >= pcF - 1 && zcolF <= pcF + 2) {
+            litF = true;
+            break;
+          }
+        }
+      }
+    }
+    __tunnel.setStyle(z.el, "opacity", litF ? '' : '0');
+  } else if (z.el.style.opacity) {
+    __tunnel.setStyle(z.el, "opacity", '');
+  }
   if (z.armor > 0 && z.hp <= z.maxHp - z.armor) {
     var acc = z.el.querySelector('.z-armor');
     if (acc) acc.remove();
@@ -5050,6 +5117,7 @@ function gameDelay(fn, ms) {
   return iv;
 }
 function spawnSkySun() {
+  if (state.mode === 'night') return;
   var el = document.createElement('button');
   el.className = 'sun-token';
   var w = WORDS[Math.floor(Math.random() * WORDS.length)];
@@ -5266,7 +5334,7 @@ function gameLoop() {
       spawnZombie();
       state.spawned++;
       var sIv = spawnInterval(state.level);
-      state.spawnTimer = Math.max(20, Math.round(sIv * (0.75 + Math.random() * 0.5)));
+      state.spawnTimer = Math.max(20, Math.round(sIv * (0.9 + Math.random() * 0.45)));
     } else {
       state.spawnTimer = 25;
     }
@@ -5274,7 +5342,7 @@ function gameLoop() {
   state.sunTimer--;
   if (state.sunTimer <= 0) {
     spawnSkySun();
-    state.sunTimer = state.mode === 'night' ? 80 : 38;
+    state.sunTimer = Math.round((state.mode === 'night' ? 80 : 100) * COLS / 9);
   }
   for (var lk in state.ladders) {
     if (!state.grid[lk]) {
@@ -5538,7 +5606,7 @@ function gameLoop() {
       p.sunCool--;
       if (p.sunCool <= 0) {
         sunflowerSun(r, c);
-        p.sunCool = p.type === 'sunshroom' ? 110 : p.type === 'twin' ? 30 : 42;
+        p.sunCool = p.type === 'sunshroom' ? 110 : p.type === 'twin' ? 30 : p.type === 'sunflower' ? Math.round(240 * COLS / 9) : 42;
         if (p.type === 'twin') (function (rr, cc) {
           gameDelay(function () {
             if (state.running) sunflowerSun(rr, cc);
@@ -5753,7 +5821,7 @@ function gameLoop() {
       p = state.grid[idx];
     var nearPlant = p && !PLANTS[p.type].noeat && Math.abs(z.x - colCenter(col)) < colStep() * 0.45;
     if (z.type === 'snorkel') {
-      if (state.mode === 'pool') {
+      if (state.mode === 'pool' || state.mode === 'fog') {
         z.diveT--;
         if (z.diveT <= 0) {
           z.diving = !z.diving;
@@ -6396,7 +6464,7 @@ function applyMode(lv) {
   lawn.classList.remove('mode-day', 'mode-night', 'mode-pool', 'mode-fog', 'mode-roof');
   lawn.classList.add('mode-' + state.mode);
   var lanes = lawn.querySelectorAll('.lane');
-  for (var i = 0; i < lanes.length; i++) lanes[i].classList.toggle('water', state.mode === 'pool' && i === 2);
+  for (var i = 0; i < lanes.length; i++) lanes[i].classList.toggle('water', (state.mode === 'pool' || state.mode === 'fog') && i === 2);
   var mn = $('modeName');
   if (mn) mn.textContent = MODE_NAMES[state.mode];
 }
@@ -6404,7 +6472,7 @@ var DECK_PRESETS = {
   day: ['sunflower', 'peashooter', 'repeater', 'walnut', 'potato', 'chomper', 'cherry', 'jalapeno', 'wintermelon'],
   night: ['puff', 'sunshroom', 'fume', 'peashooter', 'sunflower', 'hypno', 'iceshroom', 'coffee', 'walnut'],
   pool: ['lilypad', 'sunflower', 'peashooter', 'threepeater', 'kelp', 'spikeweed', 'torchwood', 'tallnut', 'cattail'],
-  fog: ['plantern', 'sunflower', 'peashooter', 'splitpea', 'cactus', 'blover', 'starfruit', 'pumpkin', 'fume'],
+  fog: ['plantern', 'sunflower', 'peashooter', 'splitpea', 'cactus', 'blover', 'starfruit', 'lilypad', 'fume'],
   roof: ['flowerpot', 'sunflower', 'cabbage', 'kernel', 'melon', 'walnut', 'umbrella', 'garlic', 'marigold']
 };
 function buildShop() {
@@ -6548,7 +6616,7 @@ function startLevelNow(n) {
   state.level = n;
   state.wordIdx = n - 1;
   state.beaten = 0;
-  state.sun = 150;
+  state.sun = 50;
   state.selected = state.deck.indexOf('sunflower') >= 0 ? 'sunflower' : (state.deck[0] || null);
   saveProgress();
   clearField();
@@ -6598,7 +6666,7 @@ $('nextLevelBtn').onclick = function () {
     state.level = target;
     state.wordIdx = target - 1;
     state.beaten = 0;
-    state.sun = 150;
+    state.sun = 50;
     state.paused = false;
     $('pauseBtn').textContent = '⏸️';
     saveProgress();
@@ -6696,8 +6764,8 @@ function clearField() {
   state.reviewDone = true;
   state.mowers = [];
   for (var mi = 0; mi < ROWS; mi++) state.mowers.push(true);
-  state.spawnTimer = 100;
-  state.sunTimer = 20;
+  state.spawnTimer = Math.round(200 * COLS / 9);
+  state.sunTimer = Math.round(20 * COLS / 9);
   state.quizTimer = 600;
   renderMowers();
   state.ladders = {};
@@ -6711,7 +6779,7 @@ function resetGame(level) {
   state.level = level || 1;
   state.wordIdx = state.level - 1;
   state.beaten = 0;
-  state.sun = 150;
+  state.sun = 50;
   state.selected = state.deck.indexOf('sunflower') >= 0 ? 'sunflower' : (state.deck[0] || null);
   saveProgress();
   clearField();
