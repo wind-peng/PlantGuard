@@ -1047,11 +1047,44 @@ function lobBall(z){
   cell.appendChild(ball);
   setTimeout(function(){ if(ball.parentNode) ball.remove(); var p2=state.grid[best.i]; if(p2&&state.running){ p2.hp-=3; if(p2.hp<=0){ state.grid[best.i]=null; tip('投篮僵尸的球把植物砸坏啦！'); } renderGrid(); } },650);
 }
+/* Explosion helpers. explodeAt used to call shakeLawn(), hurtZombie()
+   and showBoom() without any of them existing, filter its targets on a
+   z.alive flag zombies never carry, and measure distance from
+   c*10+5 instead of the cell's real centre — so the moment an armed
+   potato mine (or grave buster / doom-shroom) went off, the game loop
+   threw, the mine was never cleared, and it re-threw every tick:
+   the whole game froze. These are the missing pieces, and explodeAt
+   now works in the same colCenter()/colStep() coordinates as
+   everything else, so the zombie that stepped on the mine always
+   dies, in portrait (5 columns) and landscape (8 columns) alike. */
+function shakeLawn(){ lawn.classList.remove('shake'); void lawn.offsetWidth; lawn.classList.add('shake'); setTimeout(function(){ lawn.classList.remove('shake'); },450); }
+function showFx(r,c,emoji){
+  var laneH=lawn.clientHeight/ROWS, cellW=(lawn.clientWidth-38)/COLS;
+  var el=document.createElement('div'); el.className='boom-fx'; el.textContent=emoji;
+  el.style.left=(38+c*cellW)+'px'; el.style.top=(r*laneH)+'px';
+  el.style.width=cellW+'px'; el.style.height=laneH+'px'; el.style.fontSize='38px';
+  fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },850);
+}
+function showBoom(r,c,big){
+  var laneH=lawn.clientHeight/ROWS, cellW=(lawn.clientWidth-38)/COLS;
+  var span=big?3:1.6;
+  var el=document.createElement('div'); el.className='boom-fx'; el.textContent='💥';
+  el.style.left=(38+c*cellW-cellW*(span-1)/2)+'px'; el.style.top=(r*laneH-laneH*(span-1)/2)+'px';
+  el.style.width=(cellW*span)+'px'; el.style.height=(laneH*span)+'px'; el.style.fontSize=(big?110:72)+'px';
+  fx.appendChild(el); setTimeout(function(){ if(el.parentNode) el.remove(); },850);
+}
+function hurtZombie(z,dmg){
+  if(!z||state.zombies.indexOf(z)<0) return;
+  z.hp-=(dmg||1);
+  if(z.hp<=0){ killZombie(z); return; }
+  zFlash(z); positionZombie(z);
+}
 function explodeAt(r,c,big){
   sfx('boom'); shakeLawn();
-  var zlist=state.zombies.filter(function(z){ return z.alive&&(big?Math.abs(z.row-r)<=1&&Math.abs(z.x-(c*10+5))<=16:z.row===r&&Math.abs(z.x-(c*10+5))<=11); });
-  zlist.forEach(function(z){ hurtZombie(z,999,'boom'); });
-  showBoom(r,c); renderGrid();
+  var ctr=colCenter(c);
+  var zlist=state.zombies.filter(function(z){ return big?(Math.abs(z.row-r)<=1&&Math.abs(z.x-ctr)<=colStep()*1.5):(z.row===r&&Math.abs(z.x-ctr)<=colStep()*0.65); });
+  zlist.forEach(function(z){ hurtZombie(z,999); });
+  showBoom(r,c,big); renderGrid();
 }
 function freezeAll(r,c){ state.zombies.forEach(function(z){ z.frozen=50; if(z.el) z.el.classList.add('frozen'); }); sfx('freeze'); showFx(r,c,'❄️'); state.grid[r*COLS+c]=null; tip('❄️ 寒冰菇把所有僵尸都冻住啦！'); renderGrid(); }
 function doomExplode(r,c){ explodeAt(r,c,true); for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){ var rr=r+dr,cc=c+dc; if(rr>=0&&rr<ROWS&&cc>=0&&cc<COLS) state.craters[rr*COLS+cc]=state.tick+300; } state.grid[r*COLS+c]=null; tip('💥 毁灭菇炸出一个大坑，坑里先不能种植物！'); renderGrid(); }
