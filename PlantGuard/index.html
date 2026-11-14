@@ -67,7 +67,7 @@
   @keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-2px)}}
   .zombie{position:absolute;width:66px;margin-left:-8px;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .12s linear}
   .zombie .z-emoji{position:relative;line-height:0;animation:zbob .58s ease-in-out infinite alternate}
-  .zombie .z-svg{width:47px;height:66px;display:block;overflow:visible;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(var(--zhue,0deg));transition:filter .12s}
+  .zombie .z-svg{width:47px;height:66px;display:block;overflow:visible;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(var(--zhue,0deg));transition:filter .12s,transform .3s}
   .zombie.chilled .z-svg{filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) hue-rotate(145deg) saturate(.45) brightness(1.28)}
   .zombie.chilled .z-emoji::after{content:'❄️';position:absolute;top:-10px;right:-10px;font-size:17px;line-height:1}
   .zombie.hitflash .z-svg{filter:drop-shadow(0 4px 4px rgba(0,0,0,.3)) brightness(1.9) saturate(.35)}
@@ -352,6 +352,20 @@
   /* ===== zombie states ===== */
   .zombie.frozen .z-emoji{filter:brightness(1.35) saturate(.35) hue-rotate(150deg)}
   .zombie.charmed .z-emoji{filter:sepia(.5) saturate(2.4) hue-rotate(285deg)}
+  /* Charmed by a hypno-shroom, the zombie turns right around: head,
+     arms and feet all face right, the way it now walks and bites.
+     Only the drawing flips — the word badge and hp bar stay readable. */
+  .zombie.charmed .z-svg{transform:scaleX(-1)}
+  /* Chomper, like the original: it lunges and snaps its mouth onto the
+     zombie, drags it in, then chews with bulging cheeks while the
+     zombie's legs still kick out of its mouth, and finally gulps. */
+  .cell .plant-emoji.chomping{animation:chompLunge .55s ease-out}
+  @keyframes chompLunge{0%{transform:scale(1,1)}30%{transform:translateX(11px) scale(1.32,1.16) rotate(2deg)}55%{transform:translateX(5px) scale(1.18,.94)}78%{transform:translateX(2px) scale(1.05,1.03)}100%{transform:scale(1,1)}}
+  .cell .plant-emoji.chewing svg{animation:chewBob .34s ease-in-out infinite alternate}
+  @keyframes chewBob{from{transform:scale(1,1)}to{transform:scale(1.08,.92) translateY(1.5px)}}
+  .chew-fx{position:absolute;left:12%;top:-10px;width:32px;height:32px;overflow:hidden;z-index:2;pointer-events:none;animation:chewWiggle .3s ease-in-out infinite alternate}
+  .chew-fx svg{width:27px;height:39px;display:block;margin:3px auto 0;transform:rotate(172deg)}
+  @keyframes chewWiggle{from{transform:rotate(-5deg)}to{transform:rotate(5deg) translateY(2px)}}
   .zombie.z-boss{width:138px}
   /* ===== seed chooser ===== */
   .chooser-panel{max-width:640px;width:94vw;max-height:88vh;overflow:auto;text-align:left}
@@ -976,15 +990,15 @@ function renderGrid(){
     if(state.craters[idx]&&state.craters[idx]>state.tick) html+='<span class="crater-fx">🕳️</span>';
     if(state.pads[idx]) html+='<span class="pad-art">'+PLANTS.lilypad.emoji+'</span>';
     if(state.pots[idx]) html+='<span class="pot-art">'+PLANTS.flowerpot.emoji+'</span>';
-    if(p){ var frac=p.hp/PLANTS[p.type].hp; var hurt=(p.type==='walnut'||p.type==='tallnut')?(frac<=0.34?' hurt2':(frac<=0.67?' hurt1':'')):''; var extra=(p.imitater?' imit':'')+((p.type==='potato'&&!p.armed)?' unarmed':'');
+    if(p){ var frac=p.hp/PLANTS[p.type].hp; var hurt=(p.type==='walnut'||p.type==='tallnut')?(frac<=0.34?' hurt2':(frac<=0.67?' hurt1':'')):''; var extra=(p.imitater?' imit':'')+((p.type==='potato'&&!p.armed)?' unarmed':'')+((p.type==='chomper'&&p.chew>0)?' chewing':'');
       html+='<span class="plant-emoji'+hurt+extra+'">'+PLANTS[p.type].emoji+'</span><span class="hp"><i style="width:'+Math.max(0,frac*100)+'%"></i></span>';
       if(plantSleepy(p)) html+='<span class="sleep-fx">💤</span>';
       if(p.type==='potato') html+='<span class="arm-fx">'+(p.armed?'❗':'…')+'</span>';
-      if(p.type==='chomper'&&p.chew>0) html+='<span class="arm-fx">😋</span>';
+      if(p.type==='chomper'&&p.chew>12&&p.chewType) html+='<span class="chew-fx">'+zombieArt(p.chewType)+'</span>';
       el.classList.remove('hint');
     } else if(!state.pads[idx]&&!state.pots[idx]) el.classList.add('hint'); else el.classList.remove('hint');
     if(state.shells[idx]) html+='<span class="shell-art">'+PLANTS.pumpkin.emoji+'</span>';
-    if(state.ladders[idx]) html+='<span class="ladder-fx">'+LADDER_SVG+'</span>';
+    if(state.ladders[idx]&&p) html+='<span class="ladder-fx">'+LADDER_SVG+'</span>';
     el.innerHTML=html;
   }
   document.querySelectorAll('.plant-card').forEach(function(card){
@@ -1413,6 +1427,9 @@ function positionZombie(z){
   if(z.armor>0 && z.hp<=z.maxHp-z.armor){
     var acc=z.el.querySelector('.z-armor'); if(acc) acc.remove();
     if(z.type==='balloon') z.el.classList.remove('flying');
+    // a ladder zombie whose carried ladder was shot off has nothing
+    // left to lean on a plant — it must walk and eat like the others
+    if(z.type==='ladder') z.ladderPlaced=true;
     if(z.type==='newspaper' && !z.enraged){ z.enraged=true; sfx('rip'); tip('📰 报纸破啦，它生气了，走得快了些！'); }
     z.armor=0;
   }
@@ -1465,6 +1482,37 @@ function startSquash(r,c,z){
   setTimeout(function(){ if(el.parentNode) el.remove(); },1000);
   renderGrid();
 }
+/* Chomper, like the original game: it lunges, snaps its big mouth
+   onto the zombie and drags the whole zombie into its mouth — no
+   knock-down fall. Then it chews for a long while, cheeks bulging,
+   the zombie's legs still kicking out of its mouth (drawn by
+   renderGrid from p.chewType), until near the end it gulps them down
+   and the legs disappear (the re-render timed below). */
+function startChomp(r,c,p,z){
+  state.zombies=state.zombies.filter(function(x){return x!==z});
+  state.beaten++; state.totalBeaten++;
+  sfx('chomp');
+  p.chew=190; p.chewType=z.type;
+  var laneH=lawn.clientHeight/ROWS, cellW=(lawn.clientWidth-38)/COLS;
+  var cell=cellEl(r,c), pe=cell?cell.querySelector('.plant-emoji'):null;
+  if(pe){ pe.classList.remove('chomping'); void pe.offsetWidth; pe.classList.add('chomping'); setTimeout(function(){ pe.classList.remove('chomping'); },580); }
+  var el=z.el; z.el=null;
+  if(el){
+    el.classList.remove('eating');
+    el.style.transition='left .5s ease-in, transform .5s ease-in, opacity .5s ease-in';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      if(!el.parentNode) return;
+      el.style.left=(38+c*cellW+cellW*0.30)+'px';
+      el.style.transform='rotate(16deg) scale(.3)';
+      el.style.opacity='.85';
+    }); });
+    setTimeout(function(){ if(el.parentNode) el.remove(); },600);
+  }
+  tip('😋 大嘴花张大嘴巴——啊呜！一口把僵尸叼进嘴里，鼓着腮帮慢慢嚼……');
+  setTimeout(function(){ renderGrid(); },17800);
+  renderGrid();
+  if(state.beaten>=GOAL){ levelClear(); }
+}
 function zombieCol(z){ return colOfX(z.x); }
 function explodeCherry(r,c){
   state.grid[r*COLS+c]=null;
@@ -1504,7 +1552,11 @@ function gameLoop(){
   // spawn
   state.spawnTimer--; if(state.spawnTimer<=0){ spawnZombie(); state.spawnTimer=Math.max(55,95-state.level*6); }
   state.sunTimer--; if(state.sunTimer<=0){ spawnSkySun(); state.sunTimer=state.mode==='night'?80:38; }
-  for(var lk in state.ladders){ if(--state.ladders[lk]<=0){ delete state.ladders[lk]; renderGrid(); } }
+  // A ladder is not on a timer: like the original game it stands for
+  // as long as the plant under it lives. When that plant is eaten,
+  // smashed, crushed or blown up, the ladder falls down with it —
+  // it must never float on an empty square with zombies hopping over air.
+  for(var lk in state.ladders){ if(!state.grid[lk]){ delete state.ladders[lk]; renderGrid(); } }
   state.quizTimer--; if(state.quizTimer<=0){ openQuiz(true); state.quizTimer=340; return; }
   // plants act
   for(var r=0;r<ROWS;r++) for(var c=0;c<COLS;c++){
@@ -1556,8 +1608,8 @@ function gameLoop(){
     if(p.type==='gravebuster'){ var dz2=null; state.zombies.forEach(function(z){ if(z.row===r && z.tunnel && Math.abs(z.x-colCenter(c))<colStep()*0.6) dz2=z; }); if(dz2){ explodeAt(r,c,false); state.grid[r*COLS+c]=null; renderGrid(); } }
     if(p.type==='kelp'){ var kz=null; state.zombies.forEach(function(z){ if(z.row===r && Math.abs(z.x-colCenter(c))<colStep()*0.6 && zExposed(z)) kz=z; }); if(kz){ sfx('splash'); killZombie(kz); state.grid[r*COLS+c]=null; tip('🌊 缠绕海草把僵尸拖进水里啦！'); renderGrid(); } }
     if(p.type==='spikeweed'||p.type==='spikerock'){ state.zombies.slice().forEach(function(z){ if(z.row===r && Math.abs(z.x-colCenter(c))<colStep()*0.5 && zExposed(z) && z.type!=='balloon'){ z.hp-=(p.type==='spikerock'?0.34:0.16); if(z.hp<=0) killZombie(z); } }); }
-    if(p.type==='chomper'){ if(p.chew>0) p.chew--; else { var cz=null; state.zombies.forEach(function(z){ if(z.row===r && z.x>colCenter(c) && (z.x-colCenter(c))<colStep()*1.15 && zExposed(z) && z.type!=='giant' && z.type!=='zomboni' && z.type!=='catapult' && z.type!=='boss') cz=z; }); if(cz){ killZombie(cz); p.chew=190; sfx('chomp'); renderGrid(); } } }
-    if(p.type==='magnet'||p.type==='goldmagnet'){ p.cool--; if(p.cool<=0){ var mz=null; state.zombies.forEach(function(z){ if(Math.abs(z.row-r)<=1 && Math.abs(z.x-colCenter(c))<colStep()*3.2 && z.armor>0 && (z.type==='bucket'||z.type==='screendoor'||z.type==='football'||(z.type==='ladder'&&!z.ladderPlaced))) mz=z; }); if(mz){ mz.armor=0; if(mz.el){ var ag2=mz.el.querySelector('.z-armor'); if(ag2) ag2.remove(); } sfx('ding'); showFx(r,c,'🧲'); p.cool=140; } else p.cool=20; if(p.type==='goldmagnet'){ var sk=fx.querySelector('.sun-token'); if(sk) sk.click(); } } }
+    if(p.type==='chomper'){ if(p.chew>0) p.chew--; else { var cz=null; state.zombies.forEach(function(z){ if(z.row===r && z.x>colCenter(c) && (z.x-colCenter(c))<colStep()*1.15 && zExposed(z) && !z.charmed && z.type!=='giant' && z.type!=='zomboni' && z.type!=='catapult' && z.type!=='boss' && z.type!=='bobsled' && z.type!=='bungee' && !(z.type==='balloon'&&z.armor>0) && (!cz||z.x<cz.x)) cz=z; }); if(cz) startChomp(r,c,p,cz); } }
+    if(p.type==='magnet'||p.type==='goldmagnet'){ p.cool--; if(p.cool<=0){ var mz=null; state.zombies.forEach(function(z){ if(Math.abs(z.row-r)<=1 && Math.abs(z.x-colCenter(c))<colStep()*3.2 && z.armor>0 && (z.type==='bucket'||z.type==='screendoor'||z.type==='football'||(z.type==='ladder'&&!z.ladderPlaced))) mz=z; }); if(mz){ mz.armor=0; if(mz.type==='ladder') mz.ladderPlaced=true; if(mz.el){ var ag2=mz.el.querySelector('.z-armor'); if(ag2) ag2.remove(); } sfx('ding'); showFx(r,c,'🧲'); p.cool=140; } else p.cool=20; if(p.type==='goldmagnet'){ var sk=fx.querySelector('.sun-token'); if(sk) sk.click(); } } }
     if(p.type==='sunflower'||p.type==='twin'||p.type==='marigold'||p.type==='sunshroom'){ p.sunCool--; if(p.sunCool<=0){ sunflowerSun(r,c); p.sunCool=p.type==='sunshroom'?110:(p.type==='twin'?30:42); if(p.type==='twin') setTimeout(function(){ if(state.running) sunflowerSun(r,c); },380); if(p.type==='marigold'&&Math.random()<0.3) setTimeout(function(){ if(state.running) sunflowerSun(r,c); },650); } }
     if(p.type==='wintermelon'){
       var squashTarget=null;
@@ -1650,13 +1702,13 @@ function gameLoop(){
         vaultOver(z);
         tip(z.type==='pole'?'🏃 它撑杆一跳，跳过了一棵植物！下一棵它就跳不过去啦。':'🐬 海豚骑士跃过了一棵植物！没有海豚，它只能慢慢走啦。');
       }
+      else if(state.ladders[idx] && col>0 && z.type!=='giant' && z.type!=='boss'){ vaultOver(z); }
       else if(z.type==='ladder' && !z.ladderPlaced){
         z.ladderPlaced=true; z.armor=0;
         var ag=z.el?z.el.querySelector('.z-armor'):null; if(ag) ag.remove();
-        state.ladders[idx]=1400; vaultOver(z); renderGrid();
+        state.ladders[idx]=1; vaultOver(z); renderGrid();
         tip('🪜 它把梯子架在植物上爬过去啦！后面的僵尸也能爬这个梯子。');
       }
-      else if(state.ladders[idx]){ vaultOver(z); }
       else {
         if(z.el) z.el.classList.add('eating');
         z.eatCool-=(z.slow>0?0.5:1);
