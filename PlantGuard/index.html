@@ -4752,7 +4752,7 @@ var ZTYPES = {
   }
 };
 function levelTotal(lv) {
-  return Math.round(15 + (lv - 1) * 1.02);
+  return Math.min(30, 15 + (lv - 1));
 }
 function spawnInterval(lv) {
   return Math.max(26, Math.round(66 - (lv - 1) * 0.45));
